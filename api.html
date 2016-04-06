@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
@@ -47,8 +47,8 @@ BaseClient.</p>
 <dt id="globus_sdk.base.BaseClient">
 <em class="property">class </em><code class="descclassname">globus_sdk.base.</code><code class="descname">BaseClient</code><span class="sig-paren">(</span><em>service</em>, <em>environment='default'</em>, <em>base_path=None</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple client with error handling for Globus REST APIs. Implemented
-as a wrapper around a requests.Session object, with a simplified interface
-that does not directly expose anything from requests.</p>
+as a wrapper around a <code class="docutils literal"><span class="pre">requests.Session</span></code> object, with a simplified
+interface that does not directly expose anything from requests.</p>
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.delete">
 <code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.delete" title="Permalink to this definition">¶</a></dt>
@@ -115,6 +115,12 @@ either <cite>json_body</cite> (python data that will be encoded as JSON) or
 <dd><p>Set basic authentication for this client.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="globus_sdk.base.BaseClient.set_token">
+<code class="descname">set_token</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.set_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.set_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set bearer token authentication for this client.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -127,8 +133,8 @@ either <cite>json_body</cite> (python data that will be encoded as JSON) or
 <p>Client for the
 <a class="reference external" href="https://docs.globus.org/api/transfer/">Globus Transfer API</a>.</p>
 <p>This class provides helper methods for most common resources in the
-REST API, and basic get, post and put methods from the base rest
-client that can be used to access any REST resource.</p>
+REST API, and basic <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">put</span></code>, <code class="docutils literal"><span class="pre">post</span></code>, and <code class="docutils literal"><span class="pre">delete</span></code> methods
+from the base rest client that can be used to access any REST resource.</p>
 <p>There are two types of helper methods: list methods which return an
 iterator of <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a>
 objects, and simple methods that return a single
@@ -140,13 +146,13 @@ query parameters.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_acl_rule">
 <code class="descname">add_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/access</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_role">
 <code class="descname">add_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/role</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_roles/#create_endpoint_role">Create endpoint role</a>
 in the REST documentation for details.</p>
@@ -155,7 +161,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_server">
 <code class="descname">add_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/server</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#add_endpoint_server">Add endpoint server</a>
 in the REST documentation for details.</p>
@@ -164,25 +170,25 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.bookmark_list">
 <code class="descname">bookmark_list</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.bookmark_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.bookmark_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /bookmark_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark_list</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.cancel_task">
 <code class="descname">cancel_task</code><span class="sig-paren">(</span><em>task_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.cancel_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.cancel_task" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /task/&lt;task_id&gt;/cancel</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/cancel</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.create_bookmark">
 <code class="descname">create_bookmark</code><span class="sig-paren">(</span><em>bookmark_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /bookmark</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/bookmark</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.create_endpoint">
 <code class="descname">create_endpoint</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#create_endpoint">Create endpoint</a>
 in the REST documentation for details.</p>
@@ -205,13 +211,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_bookmark">
 <code class="descname">delete_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p>DELETE /bookmark/&lt;bookmark_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint">
 <code class="descname">delete_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>DELETE /endpoint/&lt;endpoint_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#delete_endpoint_by_id">Delete endpoint by id</a>
 in the REST documentation for details.</p>
@@ -220,13 +226,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_acl_rule">
 <code class="descname">delete_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p>DELETE /endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_role">
 <code class="descname">delete_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p>DELETE /endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_roles/#delete_endpoint_role_by_id">Delete endpoint role by id</a>
 in the REST documentation for details.</p>
@@ -235,7 +241,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_server">
 <code class="descname">delete_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>DELETE /endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#delete_endpoint_server_by_id">Delete endpoint server by id</a>
 in the REST documentation for details.</p>
@@ -244,13 +250,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_acl_list">
 <code class="descname">endpoint_acl_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_acl_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_acl_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/access_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access_list</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_activate">
 <code class="descname">endpoint_activate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_activate" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/activate</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activate</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Activate endpoint</a>
 in the REST documentation for details.</p>
@@ -259,7 +265,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_autoactivate">
 <code class="descname">endpoint_autoactivate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_autoactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/autoactivate</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/autoactivate</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Autoactivate endpoint</a>
 in the REST documentation for details.</p>
@@ -268,7 +274,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_deactivate">
 <code class="descname">endpoint_deactivate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_deactivate" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/deactivate</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/deactivate</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#deactivate_endpoint">Deactive endpoint</a>
 in the REST documentation for details.</p>
@@ -277,7 +283,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_get_activation_requirements">
 <code class="descname">endpoint_get_activation_requirements</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_get_activation_requirements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_get_activation_requirements" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/activation_requirements</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activation_requirements</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#get_activation_requirements">Get activation requirements</a>
 in the REST documentation for details.</p>
@@ -286,7 +292,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_role_list">
 <code class="descname">endpoint_role_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_role_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_role_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/role_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role_list</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_roles/#get_list_of_endpoint_roles">Get list of endpoint roles</a>
 in the REST documentation for details.</p>
@@ -294,11 +300,8 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_search">
-<code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;</dt>
-<dd>&amp;filter_scope=&lt;filter_scope&gt;</dd>
-</dl>
+<code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>filter_fulltext=None</em>, <em>filter_scope=None</em>, <em>num_results=25</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&lt;filter_scope&gt;</span></code></p>
 <p>Additional params and valid filter_scopes are documented at
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_search">https://docs.globus.org/api/transfer/endpoint_search</a></p>
 <p>This method acts as an iterator, returning results from the API as
@@ -312,19 +315,19 @@ Search for a given string as a fulltext search:
 &gt;&gt;&gt; for r in endpoint_search(&#8216;foo&#8217;, filter_scope=&#8217;my-endpoints&#8217;):
 &gt;&gt;&gt;     print(&#8216;{} has ID {}&#8217;.format(r.data[&#8216;display_name&#8217;], ep[&#8216;id&#8217;]))</p>
 <p>Search results are capped at a number of elements equal to the
-<cite>num_results</cite> parameter.
+<code class="docutils literal"><span class="pre">num_results</span></code> parameter.
 If you want more than the default, 25, elements, do like so:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                         <span class="n">num_results</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>It is very important to be aware that the Endpoint Search API limits
 you to 1000 results for any search query. If you attempt to exceed this
 limit, you will trigger a PaginationOverrunError.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
 <span class="gp">&gt;&gt;&gt; </span>                         <span class="n">num_results</span><span class="o">=</span><span class="mi">1200</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>will trigger this error.</p>
@@ -333,7 +336,7 @@ limit, you will trigger a PaginationOverrunError.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_server_list">
 <code class="descname">endpoint_server_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_server_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_server_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/server_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server_list</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_endpoint_server_list">Get endpoint server list</a>
 in the REST documentation for details.</p>
@@ -358,13 +361,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_bookmark">
 <code class="descname">get_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /bookmark/&lt;bookmark_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint">
 <code class="descname">get_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_endpoint_by_id">Get Endpoint by ID</a>
 in the REST documentation for details.</p>
@@ -373,13 +376,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_acl_rule">
 <code class="descname">get_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_role">
 <code class="descname">get_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_roles/#get_endpoint_role_by_id">Get endpoint role by id</a>
 in the REST documentation for details.</p>
@@ -388,7 +391,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_server">
 <code class="descname">get_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_endpoint_server_list">Get endpoint server list</a>
 in the REST documentation for details.</p>
@@ -397,13 +400,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_submission_id">
 <code class="descname">get_submission_id</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_submission_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_submission_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /submission_id</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/submission_id</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_task">
 <code class="descname">get_task</code><span class="sig-paren">(</span><em>task_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_task" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /task/&lt;task_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -434,7 +437,7 @@ to feed into make_transfer_data, but not inspecting the contents.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.my_effective_pause_rule_list">
 <code class="descname">my_effective_pause_rule_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.my_effective_pause_rule_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.my_effective_pause_rule_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/my_effective_pause_rule_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_effective_pause_rule_list</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_my_effective_endpoint_pause_rules">Get my effective endpoint pause rules</a>
 in the REST documentation for details.</p>
@@ -443,7 +446,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.my_shared_endpoint_list">
 <code class="descname">my_shared_endpoint_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.my_shared_endpoint_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.my_shared_endpoint_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_shared_endpoint_list">Get shared endpoint list</a>
 in the REST documentation for details.</p>
@@ -452,19 +455,19 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_ls">
 <code class="descname">operation_ls</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_ls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_ls" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /operation/endpoint/&lt;endpoint_id&gt;/ls</p>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/ls</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_mkdir">
 <code class="descname">operation_mkdir</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>path</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_mkdir" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /operation/endpoint/&lt;endpoint_id&gt;/mkdir</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/mkdir</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_rename">
 <code class="descname">operation_rename</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>oldpath</em>, <em>newpath</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_rename" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /operation/endpoint/&lt;endpoint_id&gt;/rename</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/rename</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -512,43 +515,43 @@ either <cite>json_body</cite> (python data that will be encoded as JSON) or
 <dl class="method">
 <dt id="globus_sdk.TransferClient.submit_delete">
 <code class="descname">submit_delete</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_delete" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /delete</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/delete</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.submit_transfer">
 <code class="descname">submit_transfer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /transfer</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_event_list">
-<code class="descname">task_event_list</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_event_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /task/&lt;task_id&gt;/event_list</p>
+<code class="descname">task_event_list</code><span class="sig-paren">(</span><em>task_id</em>, <em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_event_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;/event_list</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_list">
-<code class="descname">task_list</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>GET /task_list</p>
+<code class="descname">task_list</code><span class="sig-paren">(</span><em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task_list</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_pause_info">
 <code class="descname">task_pause_info</code><span class="sig-paren">(</span><em>task_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_pause_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_pause_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /task/&lt;task_id&gt;/pause_info</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/pause_info</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_bookmark">
 <code class="descname">update_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em>, <em>bookmark_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /bookmark/&lt;bookmark_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint">
 <code class="descname">update_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p>PUT /endpoint/&lt;endpoint_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#update_endpoint_by_id">Update Endpoint by ID</a>
 in the REST documentation for details.</p>
@@ -557,13 +560,13 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint_acl_rule">
 <code class="descname">update_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em>, <em>rule_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p>PUT /endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint_server">
 <code class="descname">update_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em>, <em>server_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p>POST /endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#update_endpoint_server_by_id">Update endpoint server by id</a>
 in the REST documentation for details.</p>
@@ -572,7 +575,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_task">
 <code class="descname">update_task</code><span class="sig-paren">(</span><em>task_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_task" title="Permalink to this definition">¶</a></dt>
-<dd><p>PUT /task/&lt;task_id&gt;</p>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/task/&lt;task_id&gt;</span></code></p>
 </dd></dl>
 
 </dd></dl>
@@ -582,7 +585,7 @@ in the REST documentation for details.</p>
 <em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">TransferAPIError</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/exc.html#TransferAPIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TransferAPIError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusAPIError" title="globus_sdk.exc.GlobusAPIError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusAPIError</span></code></a></p>
 <p>Error class for the Transfer API client. In addition to the
-inherited <cite>code</cite> and <cite>message</cite> instance variables, provides:</p>
+inherited <code class="docutils literal"><span class="pre">code</span></code> and <code class="docutils literal"><span class="pre">message</span></code> instance variables, provides:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -696,7 +699,7 @@ and password=client_secret.</p>
 <dl class="class">
 <dt id="globus_sdk.response.GlobusResponse">
 <em class="property">class </em><code class="descclassname">globus_sdk.response.</code><code class="descname">GlobusResponse</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/response.html#GlobusResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic response object, with a single <cite>data</cite> member.</p>
+<dd><p>Generic response object, with a single <code class="docutils literal"><span class="pre">data</span></code> member.</p>
 <dl class="attribute">
 <dt id="globus_sdk.response.GlobusResponse.data">
 <code class="descname">data</code><a class="headerlink" href="#globus_sdk.response.GlobusResponse.data" title="Permalink to this definition">¶</a></dt>
@@ -711,14 +714,26 @@ list.</p>
 <em class="property">class </em><code class="descclassname">globus_sdk.response.</code><code class="descname">GlobusHTTPResponse</code><span class="sig-paren">(</span><em>http_response</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/response.html#GlobusHTTPResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.response.GlobusResponse</span></code></a></p>
 <p>Response object that wraps an HTTP response from the underlying HTTP
-library. If the response is json, the parsed data will be available in
-<cite>data</cite>. The members <cite>text_body</cite> and <cite>json_body</cite> can be used to access
-the parsed raw data, or the parsed json data explicitly.</p>
+library. If the response is JSON, the parsed data will be available in
+<code class="docutils literal"><span class="pre">data</span></code>, otherwise <code class="docutils literal"><span class="pre">data</span></code> will be <code class="docutils literal"><span class="pre">None</span></code> and <code class="docutils literal"><span class="pre">text_body</span></code> should
+be used instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>http_status</strong> &#8211; HTTP status code returned by the server (int)</li>
+<li><strong>content_type</strong> &#8211; Content-Type header returned by the server (str)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="attribute">
 <dt id="globus_sdk.response.GlobusHTTPResponse.json_body">
 <code class="descname">json_body</code><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse.json_body" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parsed JSON data in the response. Raises an error if the response
-is not JSON.</p>
+<dd><p>Alias for <code class="docutils literal"><span class="pre">data</span></code> (contains the parsed JSON data), but will raise
+an exception if the response is not JSON instead of being <code class="docutils literal"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -735,7 +750,7 @@ is not JSON.</p>
 <dl class="class">
 <dt id="globus_sdk.exc.GlobusError">
 <em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">GlobusError</code><a class="reference internal" href="_modules/globus_sdk/exc.html#GlobusError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
 <p>Root of the Globus Exception hierarchy.
 Stub class.</p>
 </dd></dl>
@@ -814,6 +829,9 @@ results were being requested, and the API maximum would be exceeded.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -824,7 +842,7 @@ results were being requested, and the API maximum would be exceeded.</p>
       &copy;2016, Globus.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
       |

@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
@@ -53,8 +53,8 @@
 <div class="viewcode-block" id="BaseClient"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient">[docs]</a><span class="k">class</span> <span class="nc">BaseClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simple client with error handling for Globus REST APIs. Implemented</span>
-<span class="sd">    as a wrapper around a requests.Session object, with a simplified interface</span>
-<span class="sd">    that does not directly expose anything from requests.</span>
+<span class="sd">    as a wrapper around a ``requests.Session`` object, with a simplified</span>
+<span class="sd">    interface that does not directly expose anything from requests.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Can be overridden by subclasses, but must be a subclass of GlobusError</span>
@@ -80,10 +80,10 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_verify</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_ssl_verify</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.set_token"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_token">[docs]</a>    <span class="k">def</span> <span class="nf">set_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set bearer token authentication for this client.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTHTYPE_TOKEN</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bearer </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bearer </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">token</span></div>
 
 <div class="viewcode-block" id="BaseClient.set_auth_basic"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_auth_basic">[docs]</a>    <span class="k">def</span> <span class="nf">set_auth_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set basic authentication for this client.&quot;&quot;&quot;</span>
@@ -252,6 +252,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -262,7 +265,7 @@
       &copy;2016, Globus.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
