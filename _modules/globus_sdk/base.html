@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.base &mdash; globus-sdk-python 0.1 documentation</title>
+    <title>globus_sdk.base &mdash; globus-sdk-python 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1 documentation" href="../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.1.0 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
    
   
@@ -39,7 +39,6 @@
             
   <h1>Source code for globus_sdk.base</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">base64</span>
 
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -106,7 +105,8 @@
 
 <span class="sd">        :param params: dict to be encoded as a query string</span>
 
-<span class="sd">        :return: :class:`GlobusHTTPResponse &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
+<span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
+<span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
                              <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
@@ -114,11 +114,12 @@
 <div class="viewcode-block" id="BaseClient.post"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
              <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Make a POST request to the specified path, and optional body in</span>
-<span class="sd">        either `json_body` (python data that will be encoded as JSON) or</span>
-<span class="sd">        `text_body`.</span>
+<span class="sd">        Make a POST request to the specified path, with optional body in</span>
+<span class="sd">        either ``json_body`` (python data that will be encoded as JSON) or</span>
+<span class="sd">        ``text_body``.</span>
 
-<span class="sd">        :return: :class:`GlobusHTTPResponse &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
+<span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
+<span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
@@ -127,7 +128,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a DELETE request to the specified path.</span>
 
-<span class="sd">        :return: :class:`GlobusHTTPResponse &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
+<span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
+<span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
@@ -137,7 +139,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a PUT request to the specified path.</span>
 
-<span class="sd">        :return: :class:`GlobusHTTPResponse &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
+<span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
+<span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
@@ -153,7 +156,8 @@
 <span class="sd">                          serialized as JSON</span>
 <span class="sd">        :param text_body: string to send in the request body</span>
 
-<span class="sd">        :return: :class:`GlobusHTTPResponse &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
+<span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
+<span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">json_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">text_body</span> <span class="ow">is</span> <span class="bp">None</span>

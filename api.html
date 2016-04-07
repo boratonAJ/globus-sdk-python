@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Developer Interface &mdash; globus-sdk-python 0.1 documentation</title>
+    <title>Developer Interface &mdash; globus-sdk-python 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.1.0 documentation" href="index.html" />
     <link rel="prev" title="Globus SDK for Python" href="index.html" />
    
   
@@ -82,9 +82,9 @@ interface that does not directly expose anything from requests.</p>
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.post">
 <code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a POST request to the specified path, and optional body in
-either <cite>json_body</cite> (python data that will be encoded as JSON) or
-<cite>text_body</cite>.</p>
+<dd><p>Make a POST request to the specified path, with optional body in
+either <code class="docutils literal"><span class="pre">json_body</span></code> (python data that will be encoded as JSON) or
+<code class="docutils literal"><span class="pre">text_body</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -301,19 +301,24 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_search">
 <code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>filter_fulltext=None</em>, <em>filter_scope=None</em>, <em>num_results=25</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&lt;filter_scope&gt;</span></code></p>
+<dd><pre class="literal-block">
+GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&lt;filter_scope&gt;
+</pre>
 <p>Additional params and valid filter_scopes are documented at
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_search">https://docs.globus.org/api/transfer/endpoint_search</a></p>
 <p>This method acts as an iterator, returning results from the API as
 <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a>
 objects wrapping python dictionaries built from JSON documents.</p>
-<p># Simple Examples
-Search for a given string as a fulltext search:
-&gt;&gt;&gt; for r in endpoint_search(&#8216;String to search for!&#8217;):
-&gt;&gt;&gt;     print(r.data[&#8216;display_name&#8217;])</p>
-<p>Search for a given string, but only on endpoints that you own:
-&gt;&gt;&gt; for r in endpoint_search(&#8216;foo&#8217;, filter_scope=&#8217;my-endpoints&#8217;):
-&gt;&gt;&gt;     print(&#8216;{} has ID {}&#8217;.format(r.data[&#8216;display_name&#8217;], ep[&#8216;id&#8217;]))</p>
+<p>Search for a given string as a fulltext search:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Search for a given string, but only on endpoints that you own:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} has ID {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
 <p>Search results are capped at a number of elements equal to the
 <code class="docutils literal"><span class="pre">num_results</span></code> parameter.
 If you want more than the default, 25, elements, do like so:</p>
@@ -473,9 +478,9 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.post">
 <code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a POST request to the specified path, and optional body in
-either <cite>json_body</cite> (python data that will be encoded as JSON) or
-<cite>text_body</cite>.</p>
+<dd><p>Make a POST request to the specified path, with optional body in
+either <code class="docutils literal"><span class="pre">json_body</span></code> (python data that will be encoded as JSON) or
+<code class="docutils literal"><span class="pre">text_body</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -545,7 +550,7 @@ either <cite>json_body</cite> (python data that will be encoded as JSON) or
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_bookmark">
 <code class="descname">update_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em>, <em>bookmark_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 </dd></dl>
 
 <dl class="method">
@@ -643,9 +648,9 @@ provided when contacting <a class="reference external" href="mailto:support&#37;
 <dl class="method">
 <dt id="globus_sdk.AuthClient.post">
 <code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make a POST request to the specified path, and optional body in
-either <cite>json_body</cite> (python data that will be encoded as JSON) or
-<cite>text_body</cite>.</p>
+<dd><p>Make a POST request to the specified path, with optional body in
+either <code class="docutils literal"><span class="pre">json_body</span></code> (python data that will be encoded as JSON) or
+<code class="docutils literal"><span class="pre">text_body</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

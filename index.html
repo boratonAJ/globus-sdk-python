@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Globus SDK for Python &mdash; globus-sdk-python 0.1 documentation</title>
+    <title>Globus SDK for Python &mdash; globus-sdk-python 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1 documentation" href="#" />
+    <link rel="top" title="globus-sdk-python 0.1.0 documentation" href="#" />
     <link rel="next" title="Developer Interface" href="api.html" />
    
   
@@ -39,13 +39,34 @@
             
   <div class="section" id="globus-sdk-for-python">
 <h1>Globus SDK for Python<a class="headerlink" href="#globus-sdk-for-python" title="Permalink to this headline">¶</a></h1>
-<p>This SDK provides a convenient Pythonic interface to Globus REST APIs,
+<p>This SDK provides a convenient Pythonic interface to
+<a class="reference external" href="https://www.globus.org">Globus</a> REST APIs,
 including the Transfer API and the Globus Auth API. Documentation
 for the REST APIs is available at <a class="reference external" href="https://docs.globus.org">https://docs.globus.org</a>.</p>
 <p>Two interfaces are provided - a low level interface, supporting only
 <code class="docutils literal"><span class="pre">GET</span></code>, <code class="docutils literal"><span class="pre">PUT</span></code>, <code class="docutils literal"><span class="pre">POST</span></code>, and <code class="docutils literal"><span class="pre">DELETE</span></code> operations, and a high level
 interface providing helper methods for common API resources.</p>
-<p>The SDK requires python 2.6+ or 3.2+.</p>
+<p>Source code is available at <a class="reference external" href="https://github.com/globusonline/globus-sdk-python">https://github.com/globusonline/globus-sdk-python</a>.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>The Globus SDK requires <a class="reference external" href="https://www.python.org/">Python</a> 2.6+ or 3.2+.
+If a supported version of Python is not already installed on your system, see
+this <a class="reference external" href="http://docs.python-guide.org/en/latest/starting/installation/">Python installation guide </a>.</p>
+<p>The simplest way to install the Globus SDK is using the <code class="docutils literal"><span class="pre">pip</span></code> package manager
+(<a class="reference external" href="https://pypi.python.org/pypi/pip">https://pypi.python.org/pypi/pip</a>), which is included in most Python
+installations:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install globus-sdk
+</pre></div>
+</div>
+<p>This will install the Globus SDK and it&#8217;s dependencies.</p>
+<p>Bleeding edge versions of the Globus SDK can be installed by checking out the
+git repository and installing it manually:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>git checkout https://github.com/globusonline/globus-sdk-python.git
+cd globus-sdk-python
+python setup.py install
+</pre></div>
+</div>
 </div>
 <div class="section" id="basic-usage">
 <h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
@@ -92,6 +113,32 @@ SDK config file, at <code class="docutils literal"><span class="pre">~/.globus.c
 </ul>
 </div>
 </div>
+<div class="section" id="deprecations">
+<h1>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h1>
+<p>The Globus SDK uses python <code class="docutils literal"><span class="pre">DeprecationWarning</span></code> and
+<code class="docutils literal"><span class="pre">PendingDeprecationWarning</span></code> classes to indicate deprecated and soon-to-be
+deprecated behaviors.  In order to see these warnings, run python with the
+flags:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python -Wonce::DeprecationWarning \
+       -Wonce::PendingDeprecationWarning
+</pre></div>
+</div>
+<p>Note: The <code class="docutils literal"><span class="pre">-W</span></code> flag must precede any module you are passing to <code class="docutils literal"><span class="pre">python</span></code>,
+or it will be fed into <code class="docutils literal"><span class="pre">sys.argv</span></code> inside of the module.</p>
+</div>
+<div class="section" id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
+<p>Copyright 2016 University of Chicago</p>
+<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<p><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+</div>
 
 
           </div>
@@ -102,8 +149,11 @@ SDK config file, at <code class="docutils literal"><span class="pre">~/.globus.c
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Globus SDK for Python</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
 <li><a class="reference internal" href="#api-documentation">API Documentation</a></li>
+<li><a class="reference internal" href="#deprecations">Deprecations</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
