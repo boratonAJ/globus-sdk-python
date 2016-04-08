@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.base &mdash; globus-sdk-python 0.1.0 documentation</title>
+    <title>globus_sdk.base &mdash; globus-sdk-python 0.1.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.0 documentation" href="../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.1.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
    
   
@@ -46,6 +46,7 @@
 <span class="kn">from</span> <span class="nn">six.moves.urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
 
 <span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">exc</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.version</span> <span class="kn">import</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">globus_sdk.response</span> <span class="kn">import</span> <span class="n">GlobusHTTPResponse</span>
 
 
@@ -54,6 +55,22 @@
 <span class="sd">    Simple client with error handling for Globus REST APIs. Implemented</span>
 <span class="sd">    as a wrapper around a ``requests.Session`` object, with a simplified</span>
 <span class="sd">    interface that does not directly expose anything from requests.</span>
+
+<span class="sd">    :param token: optional bearer token</span>
+<span class="sd">    :param app_name: optional &quot;nice name&quot; for the application</span>
+
+<span class="sd">    ``token`` should be scoped for the service specific to the type of client</span>
+<span class="sd">    being instantiated.</span>
+<span class="sd">    It is passed to :func:`set_token &lt;globus_sdk.base.BaseClient.set_token&gt;`.</span>
+<span class="sd">    If absent, the client will attempt to load a token from the SDK config</span>
+<span class="sd">    file instead.</span>
+
+<span class="sd">    ``app_name`` is passed to</span>
+<span class="sd">    :func:`set_app_name &lt;globus_sdk.base.BaseClient.set_app_name&gt;` if</span>
+<span class="sd">    provided. Only used as a courtesy to Globus -- has no bearing on the</span>
+<span class="sd">    semantics of client actions.</span>
+
+<span class="sd">    All other arguments are for internal use and should be ignored.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Can be overridden by subclasses, but must be a subclass of GlobusError</span>
@@ -63,21 +80,37 @@
     <span class="n">AUTHTYPE_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;token&quot;</span>
     <span class="n">AUTHTYPE_BASIC</span> <span class="o">=</span> <span class="s2">&quot;basic&quot;</span>
 
+    <span class="n">BASE_USER_AGENT</span> <span class="o">=</span> <span class="s1">&#39;globus-sdk-py-{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">__version__</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get_default_environ</span><span class="p">(),</span>
-                 <span class="n">base_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">base_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">environment</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_service_url</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span> <span class="n">service</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">base_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="n">slash_join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Accept</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span> <span class="o">=</span> <span class="bp">None</span>
 
+        <span class="c1"># setup the basics for wrapping a Requests Session</span>
+        <span class="c1"># including basics for internal header dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">BASE_USER_AGENT</span>
+        <span class="p">}</span>
+
+        <span class="c1"># load a token for the client&#39;s service if it is not given as a param</span>
+        <span class="c1"># assign the result</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
             <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_load_token</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
+        <span class="c1"># verify SSL? Usually true</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_verify</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_ssl_verify</span><span class="p">(</span><span class="n">environment</span><span class="p">)</span>
+
+        <span class="c1"># set application name if given</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app_name</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">app_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_app_name</span><span class="p">(</span><span class="n">app_name</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BaseClient.set_token"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_token">[docs]</a>    <span class="k">def</span> <span class="nf">set_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set bearer token authentication for this client.&quot;&quot;&quot;</span>
@@ -89,6 +122,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTHTYPE_BASIC</span>
         <span class="n">encoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Basic </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">encoded</span></div>
+
+<div class="viewcode-block" id="BaseClient.set_app_name"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_app_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_app_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set an application name to send to Globus services as part of the User</span>
+<span class="sd">        Agent.</span>
+<span class="sd">        Application developers are encouraged to set an app name as a courtesy</span>
+<span class="sd">        to the Globus Team, and to potentially speed resolution of issues when</span>
+<span class="sd">        interacting with Globus Support.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app_name</span> <span class="o">=</span> <span class="n">app_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BASE_USER_AGENT</span><span class="p">,</span>
+                                                     <span class="n">app_name</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">config_load_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
@@ -256,9 +301,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -269,7 +311,7 @@
       &copy;2016, Globus.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>

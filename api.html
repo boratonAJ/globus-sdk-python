@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Developer Interface &mdash; globus-sdk-python 0.1.0 documentation</title>
+    <title>Developer Interface &mdash; globus-sdk-python 0.1.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.0',
+        VERSION:     '0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.0 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.1.1 documentation" href="index.html" />
     <link rel="prev" title="Globus SDK for Python" href="index.html" />
    
   
@@ -45,10 +45,32 @@
 BaseClient.</p>
 <dl class="class">
 <dt id="globus_sdk.base.BaseClient">
-<em class="property">class </em><code class="descclassname">globus_sdk.base.</code><code class="descname">BaseClient</code><span class="sig-paren">(</span><em>service</em>, <em>environment='default'</em>, <em>base_path=None</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">globus_sdk.base.</code><code class="descname">BaseClient</code><span class="sig-paren">(</span><em>service</em>, <em>environment='default'</em>, <em>base_path=None</em>, <em>token=None</em>, <em>app_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple client with error handling for Globus REST APIs. Implemented
 as a wrapper around a <code class="docutils literal"><span class="pre">requests.Session</span></code> object, with a simplified
 interface that does not directly expose anything from requests.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>token</strong> &#8211; optional bearer token</li>
+<li><strong>app_name</strong> &#8211; optional &#8220;nice name&#8221; for the application</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal"><span class="pre">token</span></code> should be scoped for the service specific to the type of client
+being instantiated.
+It is passed to <a class="reference internal" href="#globus_sdk.base.BaseClient.set_token" title="globus_sdk.base.BaseClient.set_token"><code class="xref py py-func docutils literal"><span class="pre">set_token</span></code></a>.
+If absent, the client will attempt to load a token from the SDK config
+file instead.</p>
+<p><code class="docutils literal"><span class="pre">app_name</span></code> is passed to
+<a class="reference internal" href="#globus_sdk.base.BaseClient.set_app_name" title="globus_sdk.base.BaseClient.set_app_name"><code class="xref py py-func docutils literal"><span class="pre">set_app_name</span></code></a> if
+provided. Only used as a courtesy to Globus &#8211; has no bearing on the
+semantics of client actions.</p>
+<p>All other arguments are for internal use and should be ignored.</p>
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.delete">
 <code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.delete" title="Permalink to this definition">¶</a></dt>
@@ -110,6 +132,16 @@ either <code class="docutils literal"><span class="pre">json_body</span></code> 
 </dd></dl>
 
 <dl class="method">
+<dt id="globus_sdk.base.BaseClient.set_app_name">
+<code class="descname">set_app_name</code><span class="sig-paren">(</span><em>app_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.set_app_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.set_app_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an application name to send to Globus services as part of the User
+Agent.
+Application developers are encouraged to set an app name as a courtesy
+to the Globus Team, and to potentially speed resolution of issues when
+interacting with Globus Support.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="globus_sdk.base.BaseClient.set_auth_basic">
 <code class="descname">set_auth_basic</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/base.html#BaseClient.set_auth_basic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set basic authentication for this client.</p>
@@ -128,7 +160,7 @@ either <code class="docutils literal"><span class="pre">json_body</span></code> 
 <h2>Transfer High Level Interface<a class="headerlink" href="#transfer-high-level-interface" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.TransferClient">
-<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">TransferClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">TransferClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></code></a></p>
 <p>Client for the
 <a class="reference external" href="https://docs.globus.org/api/transfer/">Globus Transfer API</a>.</p>
@@ -300,7 +332,7 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_search">
-<code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>filter_fulltext=None</em>, <em>filter_scope=None</em>, <em>num_results=25</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
 <dd><pre class="literal-block">
 GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&lt;filter_scope&gt;
 </pre>
@@ -310,29 +342,29 @@ GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&l
 <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a>
 objects wrapping python dictionaries built from JSON documents.</p>
 <p>Search for a given string as a fulltext search:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Search for a given string, but only on endpoints that you own:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} has ID {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> has ID </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>Search results are capped at a number of elements equal to the
 <code class="docutils literal"><span class="pre">num_results</span></code> parameter.
 If you want more than the default, 25, elements, do like so:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                         <span class="n">num_results</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>It is very important to be aware that the Endpoint Search API limits
 you to 1000 results for any search query. If you attempt to exceed this
 limit, you will trigger a PaginationOverrunError.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
 <span class="gp">&gt;&gt;&gt; </span>                         <span class="n">num_results</span><span class="o">=</span><span class="mi">1200</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>will trigger this error.</p>
@@ -506,6 +538,16 @@ either <code class="docutils literal"><span class="pre">json_body</span></code> 
 </dd></dl>
 
 <dl class="method">
+<dt id="globus_sdk.TransferClient.set_app_name">
+<code class="descname">set_app_name</code><span class="sig-paren">(</span><em>app_name</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.set_app_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an application name to send to Globus services as part of the User
+Agent.
+Application developers are encouraged to set an app name as a courtesy
+to the Globus Team, and to potentially speed resolution of issues when
+interacting with Globus Support.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="globus_sdk.TransferClient.set_auth_basic">
 <code class="descname">set_auth_basic</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set basic authentication for this client.</p>
@@ -531,13 +573,13 @@ either <code class="docutils literal"><span class="pre">json_body</span></code> 
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_event_list">
-<code class="descname">task_event_list</code><span class="sig-paren">(</span><em>task_id</em>, <em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_event_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">task_event_list</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_event_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;/event_list</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_list">
-<code class="descname">task_list</code><span class="sig-paren">(</span><em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
+<code class="descname">task_list</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task_list</span></code></p>
 </dd></dl>
 
@@ -607,7 +649,7 @@ provided when contacting <a class="reference external" href="mailto:support&#37;
 <h2>Auth High Level Interface<a class="headerlink" href="#auth-high-level-interface" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.AuthClient">
-<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">AuthClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/auth.html#AuthClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.AuthClient" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">AuthClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/auth.html#AuthClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.AuthClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></code></a></p>
 <dl class="method">
 <dt id="globus_sdk.AuthClient.delete">
@@ -673,6 +715,16 @@ either <code class="docutils literal"><span class="pre">json_body</span></code> 
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="globus_sdk.AuthClient.set_app_name">
+<code class="descname">set_app_name</code><span class="sig-paren">(</span><em>app_name</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.set_app_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an application name to send to Globus services as part of the User
+Agent.
+Application developers are encouraged to set an app name as a courtesy
+to the Globus Team, and to potentially speed resolution of issues when
+interacting with Globus Support.</p>
 </dd></dl>
 
 <dl class="method">
@@ -755,7 +807,7 @@ an exception if the response is not JSON instead of being <code class="docutils 
 <dl class="class">
 <dt id="globus_sdk.exc.GlobusError">
 <em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">GlobusError</code><a class="reference internal" href="_modules/globus_sdk/exc.html#GlobusError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
 <p>Root of the Globus Exception hierarchy.
 Stub class.</p>
 </dd></dl>
@@ -834,9 +886,6 @@ results were being requested, and the API maximum would be exceeded.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -847,7 +896,7 @@ results were being requested, and the API maximum would be exceeded.</p>
       &copy;2016, Globus.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
       |
