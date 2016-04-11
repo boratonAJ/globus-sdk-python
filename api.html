@@ -289,6 +289,9 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.endpoint_activate">
 <code class="descname">endpoint_activate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_activate" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activate</span></code></p>
+<p>Consider using autoactivate and web activation instead, described
+in the example for
+<a class="reference internal" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="globus_sdk.TransferClient.endpoint_autoactivate"><code class="xref py py-meth docutils literal"><span class="pre">endpoint_autoactivate()</span></code></a>.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Activate endpoint</a>
 in the REST documentation for details.</p>
@@ -298,8 +301,30 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.endpoint_autoactivate">
 <code class="descname">endpoint_autoactivate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_autoactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/autoactivate</span></code></p>
+<p>The following example will try to &#8220;auto&#8221; activate the endpoint
+using a credential available from another endpoint or sign in by
+the user with the same identity provider, but only if the
+endpoint is not already activated or going to expire within an
+hour (3600 seconds). If that fails, direct the user to the
+globus website to perform activation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">if_expires_in</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;AutoActivateFailed&quot;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Endpoint requires manual activation, please open &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;the following URL in a browser to activate the &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;endpoint:&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;https://www.globus.org/app/endpoints/</span><span class="si">%s</span><span class="s2">/activate&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="o">%</span> <span class="n">ep_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># For python 2.X, use raw_input() instead</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press ENTER after activating the endpoint:&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">if_expires_in</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the recommended flow for most thick client applications,
+because many endpoints require activation via OAuth MyProxy,
+which must be done in a browser anyway. Web based clients can
+link directly to the URL.</p>
 <p>See
-<a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Autoactivate endpoint</a>
+<a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Autoactivate endpoint </a>
 in the REST documentation for details.</p>
 </dd></dl>
 
@@ -493,8 +518,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_ls">
 <code class="descname">operation_ls</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_ls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_ls" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/ls</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">operation_ls</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/project1/&quot;</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">operation_ls</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/project1/&quot;</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -507,8 +531,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_mkdir">
 <code class="descname">operation_mkdir</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>path</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_mkdir" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/mkdir</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_mkdir</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/newdir/&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_mkdir</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/newdir/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See
@@ -520,8 +543,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_rename">
 <code class="descname">operation_rename</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>oldpath</em>, <em>newpath</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_rename" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/rename</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_rename</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="o">=</span><span class="s2">&quot;/~/file1.txt&quot;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_rename</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="o">=</span><span class="s2">&quot;/~/file1.txt&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                    <span class="n">newpath</span><span class="o">=</span><span class="s2">&quot;/~/project1data.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -595,9 +617,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.submit_transfer">
 <code class="descname">submit_transfer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">source_ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">destination_ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">tc</span><span class="o">.</span><span class="n">make_submit_transfer_item</span><span class="p">(</span><span class="s2">&quot;/source/path/dir/&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                                 <span class="s2">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
@@ -610,7 +630,7 @@ in the REST documentation for details.</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">destination_endpoint_id</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">transfer_items</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_transfer</span><span class="p">(</span><span class="n">transfer_data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id = &quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id = &quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>See

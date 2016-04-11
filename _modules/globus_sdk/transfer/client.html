@@ -190,8 +190,31 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoint_search&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.endpoint_autoactivate"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_autoactivate">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_autoactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">r&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /endpoint/&lt;endpoint_id&gt;/autoactivate``</span>
+
+<span class="sd">        The following example will try to &quot;auto&quot; activate the endpoint</span>
+<span class="sd">        using a credential available from another endpoint or sign in by</span>
+<span class="sd">        the user with the same identity provider, but only if the</span>
+<span class="sd">        endpoint is not already activated or going to expire within an</span>
+<span class="sd">        hour (3600 seconds). If that fails, direct the user to the</span>
+<span class="sd">        globus website to perform activation:</span>
+
+<span class="sd">        &gt;&gt;&gt; r = tc.endpoint_autoactivate(ep_id, if_expires_in=3600)</span>
+<span class="sd">        &gt;&gt;&gt; while (r.data[&quot;code&quot;] == &quot;AutoActivateFailed&quot;):</span>
+<span class="sd">        &gt;&gt;&gt;     print(&quot;Endpoint requires manual activation, please open &quot;</span>
+<span class="sd">        &gt;&gt;&gt;           &quot;the following URL in a browser to activate the &quot;</span>
+<span class="sd">        &gt;&gt;&gt;           &quot;endpoint:&quot;)</span>
+<span class="sd">        &gt;&gt;&gt;     print(&quot;https://www.globus.org/app/endpoints/%s/activate&quot;</span>
+<span class="sd">        &gt;&gt;&gt;           % ep_id)</span>
+<span class="sd">        &gt;&gt;&gt;     # For python 2.X, use raw_input() instead</span>
+<span class="sd">        &gt;&gt;&gt;     input(&quot;Press ENTER after activating the endpoint:&quot;)</span>
+<span class="sd">        &gt;&gt;&gt;     r = tc.endpoint_autoactivate(ep_id, if_expires_in=3600)</span>
+
+<span class="sd">        This is the recommended flow for most thick client applications,</span>
+<span class="sd">        because many endpoints require activation via OAuth MyProxy,</span>
+<span class="sd">        which must be done in a browser anyway. Web based clients can</span>
+<span class="sd">        link directly to the URL.</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Autoactivate endpoint \</span>
@@ -216,6 +239,10 @@
 <div class="viewcode-block" id="TransferClient.endpoint_activate"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_activate">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /endpoint/&lt;endpoint_id&gt;/activate``</span>
+
+<span class="sd">        Consider using autoactivate and web activation instead, described</span>
+<span class="sd">        in the example for</span>
+<span class="sd">        :meth:`~globus_sdk.TransferClient.endpoint_autoactivate`.</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Activate endpoint \</span>
@@ -468,7 +495,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /operation/endpoint/&lt;endpoint_id&gt;/ls``</span>
 
-<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
 <span class="sd">        &gt;&gt;&gt; for entry in tc.operation_ls(ep_id, path=&quot;/~/project1/&quot;):</span>
 <span class="sd">        &gt;&gt;&gt;     print(entry[&quot;name&quot;], entry[&quot;type&quot;])</span>
 
@@ -484,7 +510,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/mkdir``</span>
 
-<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
 <span class="sd">        &gt;&gt;&gt; tc.operation_mkdir(ep_id, path=&quot;/~/newdir/&quot;)</span>
 
 <span class="sd">        See</span>
@@ -504,7 +529,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/rename``</span>
 
-<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
 <span class="sd">        &gt;&gt;&gt; tc.operation_rename(ep_id, oldpath=&quot;/~/file1.txt&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                     newpath=&quot;/~/project1data.txt&quot;)</span>
 
@@ -536,8 +560,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /transfer``</span>
 
-<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(source_ep_id)</span>
-<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(destination_ep_id)</span>
 <span class="sd">        &gt;&gt;&gt; transfer_items = []</span>
 <span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
 <span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/dir/&quot;,</span>
@@ -551,7 +573,7 @@
 <span class="sd">        &gt;&gt;&gt;     destination_endpoint_id,</span>
 <span class="sd">        &gt;&gt;&gt;     transfer_items)</span>
 <span class="sd">        &gt;&gt;&gt; transfer_result = tc.submit_transfer(transfer_data)</span>
-<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result[&quot;task_id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result.data[&quot;task_id&quot;])</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Submit a transfer task \</span>
