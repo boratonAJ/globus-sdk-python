@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.1.1 documentation</title>
+    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.1.3 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1.1',
+        VERSION:     '0.1.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.1 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
    
   
@@ -159,28 +159,28 @@
 
 <span class="sd">        Search for a given string as a fulltext search:</span>
 
-<span class="sd">        &gt;&gt;&gt; for r in endpoint_search(&#39;String to search for!&#39;):</span>
+<span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;String to search for!&#39;):</span>
 <span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
 
 <span class="sd">        Search for a given string, but only on endpoints that you own:</span>
 
-<span class="sd">        &gt;&gt;&gt; for r in endpoint_search(&#39;foo&#39;, filter_scope=&#39;my-endpoints&#39;):</span>
+<span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;foo&#39;, filter_scope=&#39;my-endpoints&#39;):</span>
 <span class="sd">        &gt;&gt;&gt;     print(&#39;{} has ID {}&#39;.format(r.data[&#39;display_name&#39;], ep[&#39;id&#39;]))</span>
 
 <span class="sd">        Search results are capped at a number of elements equal to the</span>
 <span class="sd">        ``num_results`` parameter.</span>
 <span class="sd">        If you want more than the default, 25, elements, do like so:</span>
 
-<span class="sd">        &gt;&gt;&gt; for r in endpoint_search(&#39;String to search for!&#39;,</span>
-<span class="sd">        &gt;&gt;&gt;                          num_results=120):</span>
+<span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;String to search for!&#39;,</span>
+<span class="sd">        &gt;&gt;&gt;                             num_results=120):</span>
 <span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
 
 <span class="sd">        It is very important to be aware that the Endpoint Search API limits</span>
 <span class="sd">        you to 1000 results for any search query. If you attempt to exceed this</span>
 <span class="sd">        limit, you will trigger a PaginationOverrunError.</span>
 
-<span class="sd">        &gt;&gt;&gt; for r in endpoint_search(&#39;globus&#39;, # a very common string</span>
-<span class="sd">        &gt;&gt;&gt;                          num_results=1200):</span>
+<span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;globus&#39;, # a very common string</span>
+<span class="sd">        &gt;&gt;&gt;                             num_results=1200):</span>
 <span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
 
 <span class="sd">        will trigger this error.</span>
@@ -467,6 +467,15 @@
 <div class="viewcode-block" id="TransferClient.operation_ls"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.operation_ls">[docs]</a>    <span class="k">def</span> <span class="nf">operation_ls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /operation/endpoint/&lt;endpoint_id&gt;/ls``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
+<span class="sd">        &gt;&gt;&gt; for entry in tc.operation_ls(ep_id, path=&quot;/~/project1/&quot;):</span>
+<span class="sd">        &gt;&gt;&gt;     print(entry[&quot;name&quot;], entry[&quot;type&quot;])</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `List Directory Contents \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/file_operations/#list_directory_contents&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;operation/endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s2">&quot;ls&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
@@ -474,6 +483,14 @@
 <div class="viewcode-block" id="TransferClient.operation_mkdir"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.operation_mkdir">[docs]</a>    <span class="k">def</span> <span class="nf">operation_mkdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/mkdir``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
+<span class="sd">        &gt;&gt;&gt; tc.operation_mkdir(ep_id, path=&quot;/~/newdir/&quot;)</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Make Directory \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/file_operations/#make_directory&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">resource_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;operation/endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
                                         <span class="s2">&quot;mkdir&quot;</span><span class="p">)</span>
@@ -486,6 +503,15 @@
 <div class="viewcode-block" id="TransferClient.operation_rename"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.operation_rename">[docs]</a>    <span class="k">def</span> <span class="nf">operation_rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="p">,</span> <span class="n">newpath</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/rename``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(ep_id)</span>
+<span class="sd">        &gt;&gt;&gt; tc.operation_rename(ep_id, oldpath=&quot;/~/file1.txt&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                     newpath=&quot;/~/project1data.txt&quot;)</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Rename \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/file_operations/#rename&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">resource_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;operation/endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
                                         <span class="s2">&quot;rename&quot;</span><span class="p">)</span>
@@ -509,12 +535,39 @@
 <div class="viewcode-block" id="TransferClient.submit_transfer"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.submit_transfer">[docs]</a>    <span class="k">def</span> <span class="nf">submit_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /transfer``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(source_ep_id)</span>
+<span class="sd">        &gt;&gt;&gt; tc.endpoint_autoactivate(destination_ep_id)</span>
+<span class="sd">        &gt;&gt;&gt; transfer_items = []</span>
+<span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
+<span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/dir/&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                  &quot;/dest/path/dir/&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                  recursive=True))</span>
+<span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
+<span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/file.txt&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                                  &quot;/dest/path/file.txt&quot;))</span>
+<span class="sd">        &gt;&gt;&gt; transfer_data = tc.make_submit_transfer_data(</span>
+<span class="sd">        &gt;&gt;&gt;     source_endpoint_id,</span>
+<span class="sd">        &gt;&gt;&gt;     destination_endpoint_id,</span>
+<span class="sd">        &gt;&gt;&gt;     transfer_items)</span>
+<span class="sd">        &gt;&gt;&gt; transfer_result = tc.submit_transfer(transfer_data)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result[&quot;task_id&quot;])</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Submit a transfer task \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/task_submit/#submit_a_transfer_task&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/transfer&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.submit_delete"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.submit_delete">[docs]</a>    <span class="k">def</span> <span class="nf">submit_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /delete``</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Submit a delete task \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/task_submit/#submit_a_delete_task&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/delete&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
@@ -652,6 +705,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -662,7 +718,7 @@
       &copy;2016, Globus.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
     </div>
