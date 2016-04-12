@@ -2,13 +2,13 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,13 +24,22 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
-  <body role="document">  
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -141,7 +150,6 @@
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
 
-    <span class="nd">@PaginatedResource</span><span class="p">(</span><span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_total_results</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 <div class="viewcode-block" id="TransferClient.endpoint_search"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_search">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_fulltext</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                         <span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">r&quot;&quot;&quot;</span>
@@ -187,7 +195,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">merge_params</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="n">filter_scope</span><span class="p">,</span>
                      <span class="n">filter_fulltext</span><span class="o">=</span><span class="n">filter_fulltext</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoint_search&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">PaginatedResource</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="s2">&quot;endpoint_search&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">},</span>
+            <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span> <span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+            <span class="n">max_total_results</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.endpoint_autoactivate"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_autoactivate">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_autoactivate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">r&quot;&quot;&quot;</span>
@@ -275,8 +286,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
                                <span class="s1">&#39;my_shared_endpoint_list&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span> <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="TransferClient.my_effective_pause_rule_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.my_effective_pause_rule_list">[docs]</a>    <span class="k">def</span> <span class="nf">my_effective_pause_rule_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -289,8 +300,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
                                <span class="s1">&#39;my_effective_pause_rule_list&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
     <span class="c1"># Endpoint servers</span>
 
@@ -304,8 +315,8 @@
 <span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;server_list&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">server</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">server</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">for</span> <span class="n">server</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="TransferClient.get_endpoint_server"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.get_endpoint_server">[docs]</a>    <span class="k">def</span> <span class="nf">get_endpoint_server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">server_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -369,8 +380,8 @@
 <span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;role_list&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">role</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="TransferClient.add_endpoint_role"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.add_endpoint_role">[docs]</a>    <span class="k">def</span> <span class="nf">add_endpoint_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">role_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -417,8 +428,8 @@
 <span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;/access_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;access_list&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="TransferClient.get_endpoint_acl_rule"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.get_endpoint_acl_rule">[docs]</a>    <span class="k">def</span> <span class="nf">get_endpoint_acl_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -456,9 +467,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /bookmark_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">bookmark</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bookmark_list&#39;</span><span class="p">,</span>
-                                 <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]:</span>
-            <span class="k">yield</span> <span class="n">GlobusResponse</span><span class="p">(</span><span class="n">bookmark</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">bookmark</span><span class="p">)</span> <span class="k">for</span> <span class="n">bookmark</span> <span class="ow">in</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bookmark_list&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="TransferClient.create_bookmark"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.create_bookmark">[docs]</a>    <span class="k">def</span> <span class="nf">create_bookmark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bookmark_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -660,22 +670,24 @@
     <span class="c1"># Task inspection and management</span>
     <span class="c1">#</span>
 
-    <span class="nd">@PaginatedResource</span><span class="p">(</span><span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_total_results</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                       <span class="n">paging_style</span><span class="o">=</span><span class="n">PaginatedResource</span><span class="o">.</span><span class="n">PAGING_STYLE_TOTAL</span><span class="p">)</span>
 <div class="viewcode-block" id="TransferClient.task_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.task_list">[docs]</a>    <span class="k">def</span> <span class="nf">task_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_results</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /task_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task_list&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">PaginatedResource</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="s1">&#39;task_list&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">},</span>
+            <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span> <span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">paging_style</span><span class="o">=</span><span class="n">PaginatedResource</span><span class="o">.</span><span class="n">PAGING_STYLE_TOTAL</span><span class="p">)</span></div>
 
-    <span class="nd">@PaginatedResource</span><span class="p">(</span><span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">max_total_results</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                       <span class="n">paging_style</span><span class="o">=</span><span class="n">PaginatedResource</span><span class="o">.</span><span class="n">PAGING_STYLE_TOTAL</span><span class="p">)</span>
 <div class="viewcode-block" id="TransferClient.task_event_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.task_event_list">[docs]</a>    <span class="k">def</span> <span class="nf">task_event_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">num_results</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /task/&lt;task_id&gt;/event_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="s1">&#39;event_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">PaginatedResource</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">},</span>
+            <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span> <span class="n">max_results_per_call</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">paging_style</span><span class="o">=</span><span class="n">PaginatedResource</span><span class="o">.</span><span class="n">PAGING_STYLE_TOTAL</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.get_task"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.get_task">[docs]</a>    <span class="k">def</span> <span class="nf">get_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -710,15 +722,7 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../../index.html">Documentation overview</a><ul>
-  <li><a href="../../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
@@ -727,26 +731,28 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Globus.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
-      
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Globus.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
   </body>
 </html>

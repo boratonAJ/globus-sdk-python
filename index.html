@@ -2,13 +2,13 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Globus SDK for Python &mdash; globus-sdk-python 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,13 +24,24 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="#" />
-    <link rel="next" title="Developer Interface" href="api.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="next" title="Developer Interface" href="api.html" /> 
   </head>
-  <body role="document">  
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Developer Interface"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">globus-sdk-python 0.1.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -46,7 +57,7 @@ for the REST APIs is available at <a class="reference external" href="https://do
 <p>Two interfaces are provided - a low level interface, supporting only
 <code class="docutils literal"><span class="pre">GET</span></code>, <code class="docutils literal"><span class="pre">PUT</span></code>, <code class="docutils literal"><span class="pre">POST</span></code>, and <code class="docutils literal"><span class="pre">DELETE</span></code> operations, and a high level
 interface providing helper methods for common API resources.</p>
-<p>Source code is available at <a class="reference external" href="https://github.com/globusonline/globus-sdk-python">https://github.com/globusonline/globus-sdk-python</a>.</p>
+<p>Source code is available at <a class="reference external" href="https://github.com/globus/globus-sdk-python">https://github.com/globus/globus-sdk-python</a>.</p>
 </div>
 <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
@@ -56,15 +67,15 @@ this <a class="reference external" href="http://docs.python-guide.org/en/latest/
 <p>The simplest way to install the Globus SDK is using the <code class="docutils literal"><span class="pre">pip</span></code> package manager
 (<a class="reference external" href="https://pypi.python.org/pypi/pip">https://pypi.python.org/pypi/pip</a>), which is included in most Python
 installations:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>pip install globus-sdk
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">globus</span><span class="o">-</span><span class="n">sdk</span>
 </pre></div>
 </div>
 <p>This will install the Globus SDK and it&#8217;s dependencies.</p>
 <p>Bleeding edge versions of the Globus SDK can be installed by checking out the
 git repository and installing it manually:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>git checkout https://github.com/globusonline/globus-sdk-python.git
-cd globus-sdk-python
-python setup.py install
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">globus</span><span class="o">/</span><span class="n">globus</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">globus</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="n">python</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
 </div>
@@ -86,11 +97,6 @@ SDK config file, at <code class="docutils literal"><span class="pre">~/.globus.c
 
 <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span> <span class="c1"># uses transfer_token from the config file</span>
 
-<span class="c1"># low level interface</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/endpoint_search?filter_scope=my-endpoints&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">epdict</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;DATA&quot;</span><span class="p">]:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">epdict</span><span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">],</span> <span class="n">epdict</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
-
 <span class="c1"># high level interface; provides iterators for list responses</span>
 <span class="k">print</span><span class="p">(</span><span class="s2">&quot;My Endpoints:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
@@ -103,11 +109,15 @@ SDK config file, at <code class="docutils literal"><span class="pre">~/.globus.c
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Developer Interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#common-low-level-interface">Common Low Level Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#transfer-high-level-interface">Transfer High Level Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#auth-high-level-interface">Auth High Level Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#responses">Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#exceptions">Exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#transfer-client">Transfer Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#auth-client">Auth Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#common-behavior">Common Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Globus SDK Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config.html#precedence">Precedence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#config-format">Config Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#configuration-parameters">Configuration Parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -119,8 +129,8 @@ SDK config file, at <code class="docutils literal"><span class="pre">~/.globus.c
 <code class="docutils literal"><span class="pre">PendingDeprecationWarning</span></code> classes to indicate deprecated and soon-to-be
 deprecated behaviors.  In order to see these warnings, run python with the
 flags:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>python -Wonce::DeprecationWarning \
-       -Wonce::PendingDeprecationWarning
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">Wonce</span><span class="p">::</span><span class="ne">DeprecationWarning</span> \
+       <span class="o">-</span><span class="n">Wonce</span><span class="p">::</span><span class="ne">PendingDeprecationWarning</span>
 </pre></div>
 </div>
 <p>Note: The <code class="docutils literal"><span class="pre">-W</span></code> flag must precede any module you are passing to <code class="docutils literal"><span class="pre">python</span></code>,
@@ -155,14 +165,10 @@ limitations under the License.</p>
 <li><a class="reference internal" href="#deprecations">Deprecations</a></li>
 <li><a class="reference internal" href="#license">License</a></li>
 </ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="api.html" title="next chapter">Developer Interface</a></li>
-  </ul></li>
-</ul>
-</div>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">Developer Interface</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -178,29 +184,30 @@ limitations under the License.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Globus.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
-      
-      |
-      <a href="_sources/index.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Developer Interface"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">globus-sdk-python 0.1.3 documentation</a> &raquo;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Globus.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
   </body>
 </html>

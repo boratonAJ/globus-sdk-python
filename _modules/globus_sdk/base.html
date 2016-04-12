@@ -2,13 +2,13 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>globus_sdk.base &mdash; globus-sdk-python 0.1.3 documentation</title>
     
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,13 +24,22 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+    <link rel="up" title="Module code" href="../index.html" /> 
   </head>
-  <body role="document">  
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -50,27 +59,27 @@
 <span class="kn">from</span> <span class="nn">globus_sdk.response</span> <span class="kn">import</span> <span class="n">GlobusHTTPResponse</span>
 
 
-<div class="viewcode-block" id="BaseClient"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient">[docs]</a><span class="k">class</span> <span class="nc">BaseClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient">[docs]</a><span class="k">class</span> <span class="nc">BaseClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simple client with error handling for Globus REST APIs. Implemented</span>
 <span class="sd">    as a wrapper around a ``requests.Session`` object, with a simplified</span>
 <span class="sd">    interface that does not directly expose anything from requests.</span>
 
-<span class="sd">    :param token: optional bearer token</span>
+<span class="sd">    :param token: optional bearer token, scoped for the service matching the</span>
+<span class="sd">                  client&#39;s class</span>
 <span class="sd">    :param app_name: optional &quot;nice name&quot; for the application</span>
 
-<span class="sd">    ``token`` should be scoped for the service specific to the type of client</span>
-<span class="sd">    being instantiated.</span>
-<span class="sd">    It is passed to :func:`set_token &lt;globus_sdk.base.BaseClient.set_token&gt;`.</span>
-<span class="sd">    If absent, the client will attempt to load a token from the SDK config</span>
-<span class="sd">    file instead.</span>
+<span class="sd">    If ``token`` is omitted, the client will attempt to load a token from the</span>
+<span class="sd">    SDK config file instead.</span>
 
-<span class="sd">    ``app_name`` is passed to</span>
-<span class="sd">    :func:`set_app_name &lt;globus_sdk.base.BaseClient.set_app_name&gt;` if</span>
-<span class="sd">    provided. Only used as a courtesy to Globus -- has no bearing on the</span>
-<span class="sd">    semantics of client actions.</span>
+<span class="sd">    ``app_name`` has no bearing on the semantics of client actions. It is just</span>
+<span class="sd">    passed as part of the User-Agent string, and may be useful when debugging</span>
+<span class="sd">    issues with the Globus Team.</span>
 
 <span class="sd">    All other arguments are for internal use and should be ignored.</span>
+
+
+<span class="sd">    You should *never* try to directly instantiate a ``BaseClient``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Can be overridden by subclasses, but must be a subclass of GlobusError</span>
@@ -112,21 +121,33 @@
         <span class="k">if</span> <span class="n">app_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_app_name</span><span class="p">(</span><span class="n">app_name</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseClient.set_token"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_token">[docs]</a>    <span class="k">def</span> <span class="nf">set_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set bearer token authentication for this client.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BaseClient.set_token"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.set_token">[docs]</a>    <span class="k">def</span> <span class="nf">set_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set bearer token authentication for this client.</span>
+<span class="sd">        Overrides any token or basic auth header that may have been set by a</span>
+<span class="sd">        prior invocation or by</span>
+<span class="sd">        :func:`set_auth_basic &lt;globus_sdk.base.BaseClient.set_auth_basic&gt;`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTHTYPE_TOKEN</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bearer </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">token</span></div>
 
-<div class="viewcode-block" id="BaseClient.set_auth_basic"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_auth_basic">[docs]</a>    <span class="k">def</span> <span class="nf">set_auth_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set basic authentication for this client.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BaseClient.set_auth_basic"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.set_auth_basic">[docs]</a>    <span class="k">def</span> <span class="nf">set_auth_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set basic authentication for this client to the base64 encoding of</span>
+<span class="sd">        ``&lt;username&gt;:&lt;password&gt;``.</span>
+<span class="sd">        Overrides any auth token or basic auth header that may have been set by</span>
+<span class="sd">        a prior invocation or by</span>
+<span class="sd">        :func:`set_token &lt;globus_sdk.base.BaseClient.set_token&gt;`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auth_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AUTHTYPE_BASIC</span>
         <span class="n">encoded</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">[</span><span class="s2">&quot;Authorization&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Basic </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">encoded</span></div>
 
-<div class="viewcode-block" id="BaseClient.set_app_name"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.set_app_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_app_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_name</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.set_app_name"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.set_app_name">[docs]</a>    <span class="k">def</span> <span class="nf">set_app_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set an application name to send to Globus services as part of the User</span>
 <span class="sd">        Agent.</span>
+
 <span class="sd">        Application developers are encouraged to set an app name as a courtesy</span>
 <span class="sd">        to the Globus Team, and to potentially speed resolution of issues when</span>
 <span class="sd">        interacting with Globus Support.</span>
@@ -144,11 +165,14 @@
     <span class="k">def</span> <span class="nf">qjoin_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">parts</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">quote</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseClient.get"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.get"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a GET request to the specified path.</span>
 
+<span class="sd">        :param path: path for the request, with or without leading slash</span>
 <span class="sd">        :param params: dict to be encoded as a query string</span>
+<span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
+<span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -156,12 +180,17 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
                              <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseClient.post"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="BaseClient.post"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
              <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Make a POST request to the specified path, with optional body in</span>
-<span class="sd">        either ``json_body`` (python data that will be encoded as JSON) or</span>
-<span class="sd">        ``text_body``.</span>
+<span class="sd">        Make a POST request to the specified path.</span>
+
+<span class="sd">        :param path: path for the request, with or without leading slash</span>
+<span class="sd">        :param params: dict to be encoded as a query string</span>
+<span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
+<span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
+<span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
+<span class="sd">        :param text_body: raw string that will be the request body</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -169,9 +198,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseClient.delete"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.delete"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a DELETE request to the specified path.</span>
+
+<span class="sd">        :param path: path for the request, with or without leading slash</span>
+<span class="sd">        :param params: dict to be encoded as a query string</span>
+<span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
+<span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -179,10 +213,17 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                              <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseClient.put"><a class="viewcode-back" href="../../api.html#globus_sdk.base.BaseClient.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="BaseClient.put"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
             <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a PUT request to the specified path.</span>
+
+<span class="sd">        :param path: path for the request, with or without leading slash</span>
+<span class="sd">        :param params: dict to be encoded as a query string</span>
+<span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
+<span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
+<span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
+<span class="sd">        :param text_body: raw string that will be the request body</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -194,12 +235,12 @@
                  <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param method: HTTP request method, as an all caps string</span>
+<span class="sd">        :param path: path for the request, with or without leading slash</span>
 <span class="sd">        :param headers: dict containing additional headers for the request</span>
 <span class="sd">        :param params: dict to be encoded as a query string</span>
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
-<span class="sd">        :param json_body: Python data structure to send in the request body</span>
-<span class="sd">                          serialized as JSON</span>
-<span class="sd">        :param text_body: string to send in the request body</span>
+<span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
+<span class="sd">        :param text_body: raw string that will be the request body</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -284,15 +325,7 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -301,26 +334,28 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2016, Globus.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
-      
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Globus.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+    </div>
   </body>
 </html>
