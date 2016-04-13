@@ -146,18 +146,18 @@
 
 
 <span class="c1"># Thin wrappers around requests exceptions, so the SDK is API independent.</span>
-<span class="k">class</span> <span class="nc">NetworkError</span><span class="p">(</span><span class="n">GlobusError</span><span class="p">):</span>
+<div class="viewcode-block" id="NetworkError"><a class="viewcode-back" href="../../api/exceptions.html#globus_sdk.exc.NetworkError">[docs]</a><span class="k">class</span> <span class="nc">NetworkError</span><span class="p">(</span><span class="n">GlobusError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Error communicating between the SDK client and REST API server.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Error communicating with the REST API server.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="k">class</span> <span class="nc">TimeoutError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The REST request timed out.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="TimeoutError"><a class="viewcode-back" href="../../api/exceptions.html#globus_sdk.exc.TimeoutError">[docs]</a><span class="k">class</span> <span class="nc">TimeoutError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The REST request timed out.&quot;&quot;&quot;</span></div>
 
 
-<span class="k">class</span> <span class="nc">ConnectionError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Connection error occured in the REST request.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ConnectionError"><a class="viewcode-back" href="../../api/exceptions.html#globus_sdk.exc.ConnectionError">[docs]</a><span class="k">class</span> <span class="nc">ConnectionError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A connection error occured while making a REST request.&quot;&quot;&quot;</span></div>
 </pre></div>
 
           </div>

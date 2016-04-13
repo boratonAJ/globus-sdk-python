@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Developer Interface &mdash; globus-sdk-python 0.2.1 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -52,8 +52,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="developer-interface">
-<span id="api"></span><h1>Developer Interface<a class="headerlink" href="#developer-interface" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="high-level-api">
+<span id="api"></span><h1>High Level API<a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h1>
 <p>The Globus SDK provides a client class for every public Globus API.
 Each client object can take authentication credentials from config files,
 environment variables, or programmatically (either as a parameter at
@@ -66,10 +66,10 @@ very simply:</p>
 
 <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span> <span class="c1"># uses transfer_token from the config file</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;My Last 25 Tasks:&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;My Last 25 Tasks:&quot;</span><span class="p">)</span>
 <span class="c1"># `filter` to get Delete Tasks (default is just Transfer Tasks)</span>
-<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">task_list</span><span class="p">(</span><span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s1">&#39;type:TRANSFER,DELETE&#39;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">],</span> <span class="n">task</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="n">task</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">task_list</span><span class="p">(</span><span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;type:TRANSFER,DELETE&quot;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <span class="target" id="module-globus_sdk"></span><div class="section" id="transfer-client">
@@ -884,16 +884,6 @@ prior invocation or by
 </dd></dl>
 
 </div>
-<div class="section" id="common-behavior">
-<h2>Common Behavior<a class="headerlink" href="#common-behavior" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/response.html">Responses</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/exceptions.html">Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/baseclient.html">Common Low Level Interface</a></li>
-</ul>
-</div>
-</div>
 </div>
 
 
@@ -904,10 +894,9 @@ prior invocation or by
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Developer Interface</a><ul>
+<li><a class="reference internal" href="#">High Level API</a><ul>
 <li><a class="reference internal" href="#transfer-client">Transfer Client</a></li>
 <li><a class="reference internal" href="#auth-client">Auth Client</a></li>
-<li><a class="reference internal" href="#common-behavior">Common Behavior</a></li>
 </ul>
 </li>
 </ul>

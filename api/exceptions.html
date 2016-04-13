@@ -66,14 +66,21 @@ this:</p>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span>
 
-    <span class="n">eps</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="n">filter_fulltext</span><span class="o">=</span><span class="s1">&#39;myendpointsearch&#39;</span><span class="p">)</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="n">filter_fulltext</span><span class="o">=</span><span class="s2">&quot;myendpointsearch&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">eps</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">])</span>
 
     <span class="o">...</span>
+<span class="k">except</span> <span class="n">exc</span><span class="o">.</span><span class="n">GlobusAPIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="c1"># Error response from the REST service, check the code and message for</span>
+    <span class="c1"># details.</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error code&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error message&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">exc</span><span class="o">.</span><span class="n">NetworkError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Network failure, check your internet connection and firewall&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">exc</span><span class="o">.</span><span class="n">GlobusError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Some GlobusError happened when we tried to foo a bar with a baz!&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;GlobusError happened when we tried to foo a bar with a baz!&quot;</span><span class="p">)</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="o">...</span>
@@ -115,6 +122,27 @@ suitable for display to end users.</li>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="class">
+<dt id="globus_sdk.exc.NetworkError">
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">NetworkError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#NetworkError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.NetworkError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></code></a></p>
+<p>Error communicating with the REST API server.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="globus_sdk.exc.ConnectionError">
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">ConnectionError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#ConnectionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.ConnectionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></code></a></p>
+<p>A connection error occured while making a REST request.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="globus_sdk.exc.TimeoutError">
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">TimeoutError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#TimeoutError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></code></a></p>
+<p>The REST request timed out.</p>
 </dd></dl>
 
 <dl class="class">

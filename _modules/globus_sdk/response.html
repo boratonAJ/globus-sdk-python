@@ -50,12 +50,21 @@
 <div class="viewcode-block" id="GlobusResponse"><a class="viewcode-back" href="../../api/response.html#globus_sdk.GlobusResponse">[docs]</a><span></span><span class="k">class</span> <span class="nc">GlobusResponse</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic response object, with a single ``data`` member.</span>
+
+<span class="sd">    The most common response data is a JSON dictionary. To make</span>
+<span class="sd">    handling this type of response as seemless as possible, the</span>
+<span class="sd">    ``GlobusResponse`` object also supports direct dictionary item</span>
+<span class="sd">    access, as an alias for accessing an item of the underlying</span>
+<span class="sd">    ``data``. If ``data`` is not a dictionary, item access will raise</span>
+<span class="sd">    ``TypeError``.</span>
+
+<span class="sd">    &gt;&gt;&gt; print(&quot;Response ID&quot;: r[&quot;id&quot;]) # alias for r.data[&quot;id&quot;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        GlobusResponse objects *always* wrap some kind of data to return to a</span>
-<span class="sd">        caller. Most basic actions on a GlobusResponse are just ways of</span>
-<span class="sd">        interacting with this data.</span>
+<span class="sd">        ``GlobusResponse`` objects *always* wrap some kind of data to</span>
+<span class="sd">        return to a caller. Most basic actions on a GlobusResponse are</span>
+<span class="sd">        just ways of interacting with this data.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
 
@@ -94,7 +103,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Response object that wraps an HTTP response from the underlying HTTP</span>
 <span class="sd">    library. If the response is JSON, the parsed data will be available in</span>
-<span class="sd">    ``data``, otherwise ``data`` will be ``None`` and ``text_body`` should</span>
+<span class="sd">    ``data``, otherwise ``data`` will be ``None`` and ``text`` should</span>
 <span class="sd">    be used instead.</span>
 
 <span class="sd">    :ivar http_status: HTTP status code returned by the server (int)</span>
