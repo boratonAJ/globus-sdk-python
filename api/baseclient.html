@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Common Low Level Interface &mdash; globus-sdk-python 0.1.3 documentation</title>
+    <title>Common Low Level Interface &mdash; globus-sdk-python 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.3',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="../index.html" />
     <link rel="up" title="Developer Interface" href="../api.html" />
+    <link rel="next" title="Globus SDK Configuration" href="../config.html" />
     <link rel="prev" title="Exceptions" href="exceptions.html" /> 
   </head>
   <body role="document">
@@ -38,9 +39,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="../config.html" title="Globus SDK Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="exceptions.html" title="Exceptions"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">Developer Interface</a> &raquo;</li> 
       </ul>
     </div>  
@@ -111,7 +115,7 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a GET request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -122,6 +126,8 @@ interacting with Globus Support.</p>
 <li><strong>params</strong> &#8211; dict to be encoded as a query string</li>
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
+<li><strong>response_class</strong> &#8211; class for response object, overrides the
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
@@ -134,7 +140,7 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.post">
-<code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.post" title="Permalink to this definition">¶</a></dt>
+<code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a POST request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -147,6 +153,8 @@ interacting with Globus Support.</p>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
+<li><strong>response_class</strong> &#8211; class for response object, overrides the
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
@@ -159,7 +167,7 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.delete">
-<code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a DELETE request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -170,6 +178,8 @@ interacting with Globus Support.</p>
 <li><strong>params</strong> &#8211; dict to be encoded as a query string</li>
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
+<li><strong>response_class</strong> &#8211; class for response object, overrides the
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
@@ -182,7 +192,7 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.base.BaseClient.put">
-<code class="descname">put</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.put" title="Permalink to this definition">¶</a></dt>
+<code class="descname">put</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/base.html#BaseClient.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.base.BaseClient.put" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a PUT request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -195,6 +205,8 @@ interacting with Globus Support.</p>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
+<li><strong>response_class</strong> &#8211; class for response object, overrides the
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
@@ -218,6 +230,9 @@ interacting with Globus Support.</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="exceptions.html"
                         title="previous chapter">Exceptions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../config.html"
+                        title="next chapter">Globus SDK Configuration</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -233,6 +248,9 @@ interacting with Globus Support.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -249,15 +267,18 @@ interacting with Globus Support.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="../config.html" title="Globus SDK Configuration"
+             >next</a> |</li>
+        <li class="right" >
           <a href="exceptions.html" title="Exceptions"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../api.html" >Developer Interface</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

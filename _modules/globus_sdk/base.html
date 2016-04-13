@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.base &mdash; globus-sdk-python 0.1.3 documentation</title>
+    <title>globus_sdk.base &mdash; globus-sdk-python 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.3',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -84,7 +84,7 @@
 
     <span class="c1"># Can be overridden by subclasses, but must be a subclass of GlobusError</span>
     <span class="n">error_class</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">GlobusAPIError</span>
-    <span class="n">response_class</span> <span class="o">=</span> <span class="n">GlobusHTTPResponse</span>
+    <span class="n">default_response_class</span> <span class="o">=</span> <span class="n">GlobusHTTPResponse</span>
 
     <span class="n">AUTHTYPE_TOKEN</span> <span class="o">=</span> <span class="s2">&quot;token&quot;</span>
     <span class="n">AUTHTYPE_BASIC</span> <span class="o">=</span> <span class="s2">&quot;basic&quot;</span>
@@ -165,7 +165,8 @@
     <span class="k">def</span> <span class="nf">qjoin_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">parts</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">quote</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">)</span>
 
-<div class="viewcode-block" id="BaseClient.get"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.get"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+            <span class="n">response_class</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a GET request to the specified path.</span>
 
@@ -173,15 +174,17 @@
 <span class="sd">        :param params: dict to be encoded as a query string</span>
 <span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
+<span class="sd">        :param response_class: class for response object, overrides the</span>
+<span class="sd">                               client&#39;s ``default_response_class``</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
-                             <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
+                             <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="n">response_class</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseClient.post"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-             <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+             <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a POST request to the specified path.</span>
 
@@ -191,14 +194,18 @@
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
 <span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
 <span class="sd">        :param text_body: raw string that will be the request body</span>
+<span class="sd">        :param response_class: class for response object, overrides the</span>
+<span class="sd">                               client&#39;s ``default_response_class``</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
+                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span>
+                             <span class="n">response_class</span><span class="o">=</span><span class="n">response_class</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="BaseClient.delete"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseClient.delete"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+               <span class="n">response_class</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a DELETE request to the specified path.</span>
 
@@ -206,15 +213,18 @@
 <span class="sd">        :param params: dict to be encoded as a query string</span>
 <span class="sd">        :param headers: dict of HTTP headers to add to the request</span>
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
+<span class="sd">        :param response_class: class for response object, overrides the</span>
+<span class="sd">                               client&#39;s ``default_response_class``</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
+                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span>
+                             <span class="n">response_class</span><span class="o">=</span><span class="n">response_class</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BaseClient.put"><a class="viewcode-back" href="../../api/baseclient.html#globus_sdk.BaseClient.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-            <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">response_class</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a PUT request to the specified path.</span>
 
@@ -224,15 +234,19 @@
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
 <span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
 <span class="sd">        :param text_body: raw string that will be the request body</span>
+<span class="sd">        :param response_class: class for response object, overrides the</span>
+<span class="sd">                               client&#39;s ``default_response_class``</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">(</span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">json_body</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span></div>
+                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span>
+                             <span class="n">response_class</span><span class="o">=</span><span class="n">response_class</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">json_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">text_body</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">response_class</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param method: HTTP request method, as an all caps string</span>
 <span class="sd">        :param path: path for the request, with or without leading slash</span>
@@ -241,6 +255,8 @@
 <span class="sd">        :param auth: tuple of (user, password) for basic auth [DEPRECATED]</span>
 <span class="sd">        :param json_body: dict that will be encoded as a JSON request body</span>
 <span class="sd">        :param text_body: raw string that will be the request body</span>
+<span class="sd">        :param response_class: class for response object, overrides the</span>
+<span class="sd">                               client&#39;s ``default_response_class``</span>
 
 <span class="sd">        :return: :class:`GlobusHTTPResponse \</span>
 <span class="sd">        &lt;globus_sdk.response.GlobusHTTPResponse&gt;` object</span>
@@ -252,15 +268,25 @@
         <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">rheaders</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">slash_join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
-                                  <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
-                                  <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">,</span>
-                                  <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-                                  <span class="n">data</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span>
-                                  <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verify</span><span class="p">,</span>
-                                  <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+                                      <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                      <span class="n">headers</span><span class="o">=</span><span class="n">rheaders</span><span class="p">,</span>
+                                      <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                                      <span class="n">data</span><span class="o">=</span><span class="n">text_body</span><span class="p">,</span>
+                                      <span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verify</span><span class="p">,</span>
+                                      <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">Timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">NetworkError</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="k">if</span> <span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_class</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response_class</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_response_class</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">response_class</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
         <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
 
 
@@ -334,6 +360,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -349,13 +378,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

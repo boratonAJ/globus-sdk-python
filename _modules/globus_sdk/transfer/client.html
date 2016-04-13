@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.1.3 documentation</title>
+    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.1.3',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,21 +49,11 @@
   <h1>Source code for globus_sdk.transfer.client</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 
-<span class="kn">import</span> <span class="nn">json</span>
-
 <span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">exc</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">globus_sdk.response</span> <span class="kn">import</span> <span class="n">GlobusResponse</span><span class="p">,</span> <span class="n">GlobusHTTPResponse</span>
 <span class="kn">from</span> <span class="nn">globus_sdk.base</span> <span class="kn">import</span> <span class="n">BaseClient</span><span class="p">,</span> <span class="n">merge_params</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.transfer.response</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TransferResponse</span><span class="p">,</span> <span class="n">IterableTransferResponse</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">globus_sdk.transfer.paging</span> <span class="kn">import</span> <span class="n">PaginatedResource</span>
-
-
-<span class="k">class</span> <span class="nc">TransferResponse</span><span class="p">(</span><span class="n">GlobusHTTPResponse</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Custom response for TransferClient, which relies on the fact that the</span>
-<span class="sd">    body is always json to make printing the response more friendly.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">json_body</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TransferClient"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient">[docs]</a><span class="k">class</span> <span class="nc">TransferClient</span><span class="p">(</span><span class="n">BaseClient</span><span class="p">):</span>
@@ -86,7 +76,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">error_class</span> <span class="o">=</span> <span class="n">exc</span><span class="o">.</span><span class="n">TransferAPIError</span>
-    <span class="n">response_class</span> <span class="o">=</span> <span class="n">TransferResponse</span>
+    <span class="n">default_response_class</span> <span class="o">=</span> <span class="n">TransferResponse</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get_default_environ</span><span class="p">(),</span>
                  <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -167,13 +157,14 @@
 
 <span class="sd">        Search for a given string as a fulltext search:</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;String to search for!&#39;):</span>
-<span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
+<span class="sd">        &gt;&gt;&gt;     print(r[&#39;display_name&#39;])</span>
 
 <span class="sd">        Search for a given string, but only on endpoints that you own:</span>
 
 <span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;foo&#39;, filter_scope=&#39;my-endpoints&#39;):</span>
-<span class="sd">        &gt;&gt;&gt;     print(&#39;{} has ID {}&#39;.format(r.data[&#39;display_name&#39;], ep[&#39;id&#39;]))</span>
+<span class="sd">        &gt;&gt;&gt;     print(&#39;{} has ID {}&#39;.format(r[&#39;display_name&#39;], ep[&#39;id&#39;]))</span>
 
 <span class="sd">        Search results are capped at a number of elements equal to the</span>
 <span class="sd">        ``num_results`` parameter.</span>
@@ -181,7 +172,7 @@
 
 <span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;String to search for!&#39;,</span>
 <span class="sd">        &gt;&gt;&gt;                             num_results=120):</span>
-<span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
+<span class="sd">        &gt;&gt;&gt;     print(r[&#39;display_name&#39;])</span>
 
 <span class="sd">        It is very important to be aware that the Endpoint Search API limits</span>
 <span class="sd">        you to 1000 results for any search query. If you attempt to exceed this</span>
@@ -189,7 +180,7 @@
 
 <span class="sd">        &gt;&gt;&gt; for r in tc.endpoint_search(&#39;globus&#39;, # a very common string</span>
 <span class="sd">        &gt;&gt;&gt;                             num_results=1200):</span>
-<span class="sd">        &gt;&gt;&gt;     print(r.data[&#39;display_name&#39;])</span>
+<span class="sd">        &gt;&gt;&gt;     print(r[&#39;display_name&#39;])</span>
 
 <span class="sd">        will trigger this error.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,8 +202,9 @@
 <span class="sd">        hour (3600 seconds). If that fails, direct the user to the</span>
 <span class="sd">        globus website to perform activation:</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; r = tc.endpoint_autoactivate(ep_id, if_expires_in=3600)</span>
-<span class="sd">        &gt;&gt;&gt; while (r.data[&quot;code&quot;] == &quot;AutoActivateFailed&quot;):</span>
+<span class="sd">        &gt;&gt;&gt; while (r[&quot;code&quot;] == &quot;AutoActivateFailed&quot;):</span>
 <span class="sd">        &gt;&gt;&gt;     print(&quot;Endpoint requires manual activation, please open &quot;</span>
 <span class="sd">        &gt;&gt;&gt;           &quot;the following URL in a browser to activate the &quot;</span>
 <span class="sd">        &gt;&gt;&gt;           &quot;endpoint:&quot;)</span>
@@ -275,20 +267,6 @@
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s2">&quot;autoactivate&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TransferClient.my_shared_endpoint_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.my_shared_endpoint_list">[docs]</a>    <span class="k">def</span> <span class="nf">my_shared_endpoint_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list``</span>
-
-<span class="sd">        See</span>
-<span class="sd">        `Get shared endpoint list \</span>
-<span class="sd">        &lt;https://docs.globus.org/api/transfer/endpoint/#get_shared_endpoint_list&gt;`_</span>
-<span class="sd">        in the REST documentation for details.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
-                               <span class="s1">&#39;my_shared_endpoint_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span> <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
-
 <div class="viewcode-block" id="TransferClient.my_effective_pause_rule_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.my_effective_pause_rule_list">[docs]</a>    <span class="k">def</span> <span class="nf">my_effective_pause_rule_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;/my_effective_pause_rule_list``</span>
@@ -300,8 +278,50 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
                                <span class="s1">&#39;my_effective_pause_rule_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
+
+    <span class="c1"># Shared Endpoints</span>
+
+<div class="viewcode-block" id="TransferClient.my_shared_endpoint_list"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.my_shared_endpoint_list">[docs]</a>    <span class="k">def</span> <span class="nf">my_shared_endpoint_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list``</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Get shared endpoint list \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/endpoint/#get_shared_endpoint_list&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span>
+                               <span class="s1">&#39;my_shared_endpoint_list&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TransferClient.create_shared_endpoint"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.create_shared_endpoint">[docs]</a>    <span class="k">def</span> <span class="nf">create_shared_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ``POST /shared_endpoint``</span>
+
+<span class="sd">        :param data: A python dict representation of a ``shared_endpoint``</span>
+<span class="sd">                     document</span>
+
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; shared_ep_data = {</span>
+<span class="sd">        &gt;&gt;&gt;   &#39;DATA_TYPE&#39;: &#39;shared_endpoint&#39;,</span>
+<span class="sd">        &gt;&gt;&gt;   &#39;host_endpoint&#39;: host_endpoint_id,</span>
+<span class="sd">        &gt;&gt;&gt;   &#39;host_path&#39;: host_path,</span>
+<span class="sd">        &gt;&gt;&gt;   &#39;display_name&#39;: display_name,</span>
+<span class="sd">        &gt;&gt;&gt;   # optionally specify additional endpoint fields</span>
+<span class="sd">        &gt;&gt;&gt;   &#39;description&#39;: &#39;my test share&#39;</span>
+<span class="sd">        &gt;&gt;&gt; }</span>
+<span class="sd">        &gt;&gt;&gt; create_result = tc.create_shared_endpoint(shared_ep_data)</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Create shared endpoint \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/endpoint/#create_shared_endpoint&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;shared_endpoint&#39;</span><span class="p">,</span> <span class="n">json_body</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                         <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
     <span class="c1"># Endpoint servers</span>
 
@@ -315,8 +335,8 @@
 <span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;server_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">server</span><span class="p">)</span> <span class="k">for</span> <span class="n">server</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.get_endpoint_server"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.get_endpoint_server">[docs]</a>    <span class="k">def</span> <span class="nf">get_endpoint_server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">server_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -380,8 +400,8 @@
 <span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;role_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.add_endpoint_role"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.add_endpoint_role">[docs]</a>    <span class="k">def</span> <span class="nf">add_endpoint_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">role_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -428,8 +448,8 @@
 <span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;/access_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;access_list&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.get_endpoint_acl_rule"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.get_endpoint_acl_rule">[docs]</a>    <span class="k">def</span> <span class="nf">get_endpoint_acl_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -467,8 +487,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /bookmark_list``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">GlobusResponse</span><span class="p">(</span><span class="n">bookmark</span><span class="p">)</span> <span class="k">for</span> <span class="n">bookmark</span> <span class="ow">in</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bookmark_list&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">json_body</span><span class="p">[</span><span class="s1">&#39;DATA&#39;</span><span class="p">]]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bookmark_list&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.create_bookmark"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.create_bookmark">[docs]</a>    <span class="k">def</span> <span class="nf">create_bookmark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bookmark_data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -505,6 +525,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /operation/endpoint/&lt;endpoint_id&gt;/ls``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; for entry in tc.operation_ls(ep_id, path=&quot;/~/project1/&quot;):</span>
 <span class="sd">        &gt;&gt;&gt;     print(entry[&quot;name&quot;], entry[&quot;type&quot;])</span>
 
@@ -514,12 +535,14 @@
 <span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s2">&quot;operation/endpoint&quot;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s2">&quot;ls&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.operation_mkdir"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.operation_mkdir">[docs]</a>    <span class="k">def</span> <span class="nf">operation_mkdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/mkdir``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; tc.operation_mkdir(ep_id, path=&quot;/~/newdir/&quot;)</span>
 
 <span class="sd">        See</span>
@@ -539,6 +562,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /operation/endpoint/&lt;endpoint_id&gt;/rename``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; tc.operation_rename(ep_id, oldpath=&quot;/~/file1.txt&quot;,</span>
 <span class="sd">        &gt;&gt;&gt;                     newpath=&quot;/~/project1data.txt&quot;)</span>
 
@@ -570,6 +594,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /transfer``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; transfer_items = []</span>
 <span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
 <span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/dir/&quot;,</span>
@@ -583,7 +608,7 @@
 <span class="sd">        &gt;&gt;&gt;     destination_endpoint_id,</span>
 <span class="sd">        &gt;&gt;&gt;     transfer_items)</span>
 <span class="sd">        &gt;&gt;&gt; transfer_result = tc.submit_transfer(transfer_data)</span>
-<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result.data[&quot;task_id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result[&quot;task_id&quot;])</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Submit a transfer task \</span>
@@ -622,7 +647,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">datadoc</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;DATA_TYPE&#39;</span><span class="p">:</span> <span class="s1">&#39;transfer&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;submission_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_submission_id</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;submission_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_submission_id</span><span class="p">()[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span>
             <span class="s1">&#39;source_endpoint&#39;</span><span class="p">:</span> <span class="n">source_endpoint</span><span class="p">,</span>
             <span class="s1">&#39;destination_endpoint&#39;</span><span class="p">:</span> <span class="n">dest_endpoint</span><span class="p">,</span>
             <span class="s1">&#39;DATA&#39;</span><span class="p">:</span> <span class="n">transfer_items</span>
@@ -731,6 +756,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -746,13 +774,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>

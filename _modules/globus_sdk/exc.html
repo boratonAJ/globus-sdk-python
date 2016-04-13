@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.exc &mdash; globus-sdk-python 0.1.3 documentation</title>
+    <title>globus_sdk.exc &mdash; globus-sdk-python 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.3',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.1.3 documentation" href="../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -143,6 +143,21 @@
 <span class="sd">    Paginated results exceeded a limit set by our API. Too many pages of</span>
 <span class="sd">    results were being requested, and the API maximum would be exceeded.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="c1"># Thin wrappers around requests exceptions, so the SDK is API independent.</span>
+<span class="k">class</span> <span class="nc">NetworkError</span><span class="p">(</span><span class="n">GlobusError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Error communicating between the SDK client and REST API server.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">TimeoutError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The REST request timed out.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">ConnectionError</span><span class="p">(</span><span class="n">NetworkError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A Connection error occured in the REST request.&quot;&quot;&quot;</span>
 </pre></div>
 
           </div>
@@ -158,6 +173,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -173,13 +191,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.1.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
     </div>
   </body>
 </html>
