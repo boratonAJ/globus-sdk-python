@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High Level API &mdash; globus-sdk-python 0.2.1 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.2 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.2 documentation" href="index.html" />
     <link rel="next" title="Responses" href="api/response.html" />
     <link rel="prev" title="Globus SDK for Python" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -477,31 +477,37 @@ in the REST documentation for details.</p>
 <code class="descname">submit_transfer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">tc</span><span class="o">.</span><span class="n">make_submit_transfer_item</span><span class="p">(</span><span class="s2">&quot;/source/path/dir/&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                 <span class="s2">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                 <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">tc</span><span class="o">.</span><span class="n">make_submit_transfer_item</span><span class="p">(</span><span class="s2">&quot;/source/path/file.txt&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                 <span class="s2">&quot;/dest/path/file.txt&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_data</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">make_submit_transfer_data</span><span class="p">(</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">source_endpoint_id</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">destination_endpoint_id</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">transfer_items</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_transfer</span><span class="p">(</span><span class="n">transfer_data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id = &quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">source_endpoint_id</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">destination_endpoint_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/dir/&quot;</span><span class="p">,</span> <span class="s2">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/file.txt&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="s2">&quot;/dest/path/file.txt&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_transfer</span><span class="p">(</span><span class="n">tdata</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
+<p>The <cite>data</cite> parameter can be a normal Python dictionary, or
+a <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">TransferData</span></code></a> object.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/task_submit/#submit_a_transfer_task">Submit a transfer task</a>
-in the REST documentation for details.</p>
+in the REST documentation for more details.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.submit_delete">
 <code class="descname">submit_delete</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_delete" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/delete</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">DeleteData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/dir/to/delete/&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/file/to/delete/file.txt&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delete_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_delete</span><span class="p">(</span><span class="n">ddata</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">delete_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The <cite>data</cite> parameter can be a normal Python dictionary, or
+a <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">DeleteData</span></code></a> object.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/task_submit/#submit_a_delete_task">Submit a delete task</a>
 in the REST documentation for details.</p>
@@ -699,6 +705,33 @@ a prior invocation or by
 Overrides any token or basic auth header that may have been set by a
 prior invocation or by
 <a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_auth_basic" title="globus_sdk.base.BaseClient.set_auth_basic"><code class="xref py py-func docutils literal"><span class="pre">set_auth_basic</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="globus_sdk.TransferData">
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">TransferData</code><span class="sig-paren">(</span><em>transfer_client</em>, <em>source_endpoint</em>, <em>destination_endpoint</em>, <em>label=None</em>, <em>sync_level=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#TransferData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>Convenience class for constructing a transfer document, to use as the
+<cite>data</cite> parameter to
+<a class="reference internal" href="#globus_sdk.TransferClient.submit_transfer" title="globus_sdk.TransferClient.submit_transfer"><code class="xref py py-meth docutils literal"><span class="pre">submit_transfer</span></code></a>.</p>
+<p>At least one item must be added using
+<a class="reference internal" href="#globus_sdk.TransferData.add_item" title="globus_sdk.TransferData.add_item"><code class="xref py py-meth docutils literal"><span class="pre">add_item</span></code></a>.</p>
+<p>For compatibility with older code and those knowledgeable about the API
+sync_level can be 1, 2, or 3, but it can also be
+&#8220;exists&#8221;, &#8220;mtime&#8221;, or &#8220;checksum&#8221; if you want greater clarity in
+client code.</p>
+<p>Includes fetching the submission ID as part of document generation. The
+submission ID can be pulled out of here to inspect, but the document
+can be used as-is multiple times over to retry a potential submission
+failure (so there shouldn&#8217;t be any need to inspect it).</p>
+<dl class="method">
+<dt id="globus_sdk.TransferData.add_item">
+<code class="descname">add_item</code><span class="sig-paren">(</span><em>source_path</em>, <em>destination_path</em>, <em>recursive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#TransferData.add_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferData.add_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a file or directory to be transfered.</p>
+<p>Appends a transfer_item document to the DATA key of the transfer
+document.</p>
 </dd></dl>
 
 </dd></dl>
@@ -946,7 +979,7 @@ prior invocation or by
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.1 documentation</title>
+    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.2 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.1',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.1 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.2 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -595,31 +595,38 @@
 <span class="sd">        ``POST /transfer``</span>
 
 <span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
-<span class="sd">        &gt;&gt;&gt; transfer_items = []</span>
-<span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
-<span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/dir/&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                                  &quot;/dest/path/dir/&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                                  recursive=True))</span>
-<span class="sd">        &gt;&gt;&gt; transfer_items.append(</span>
-<span class="sd">        &gt;&gt;&gt;     tc.make_submit_transfer_item(&quot;/source/path/file.txt&quot;,</span>
-<span class="sd">        &gt;&gt;&gt;                                  &quot;/dest/path/file.txt&quot;))</span>
-<span class="sd">        &gt;&gt;&gt; transfer_data = tc.make_submit_transfer_data(</span>
-<span class="sd">        &gt;&gt;&gt;     source_endpoint_id,</span>
-<span class="sd">        &gt;&gt;&gt;     destination_endpoint_id,</span>
-<span class="sd">        &gt;&gt;&gt;     transfer_items)</span>
-<span class="sd">        &gt;&gt;&gt; transfer_result = tc.submit_transfer(transfer_data)</span>
-<span class="sd">        &gt;&gt;&gt; print(&quot;task_id = &quot;, transfer_result[&quot;task_id&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tdata = globus_sdk.TransferData(tc, source_endpoint_id,</span>
+<span class="sd">        &gt;&gt;&gt;                                 destination_endpoint_id)</span>
+<span class="sd">        &gt;&gt;&gt; tdata.add_item(&quot;/source/path/dir/&quot;, &quot;/dest/path/dir/&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                recursive=True)</span>
+<span class="sd">        &gt;&gt;&gt; tdata.add_item(&quot;/source/path/file.txt&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;                &quot;/dest/path/file.txt&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; transfer_result = tc.submit_transfer(tdata)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;task_id =&quot;, transfer_result[&quot;task_id&quot;])</span>
+
+<span class="sd">        The `data` parameter can be a normal Python dictionary, or</span>
+<span class="sd">        a :class:`TransferData &lt;globus_sdk.TransferData&gt;` object.</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Submit a transfer task \</span>
 <span class="sd">        &lt;https://docs.globus.org/api/transfer/task_submit/#submit_a_transfer_task&gt;`_</span>
-<span class="sd">        in the REST documentation for details.</span>
+<span class="sd">        in the REST documentation for more details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/transfer&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.submit_delete"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.submit_delete">[docs]</a>    <span class="k">def</span> <span class="nf">submit_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /delete``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; ddata = globus_sdk.DeleteData(tc, endpoint_id, recursive=True)</span>
+<span class="sd">        &gt;&gt;&gt; ddata.add_item(&quot;/dir/to/delete/&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; ddata.add_item(&quot;/file/to/delete/file.txt&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; delete_result = tc.submit_delete(ddata)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;task_id =&quot;, delete_result[&quot;task_id&quot;])</span>
+
+<span class="sd">        The `data` parameter can be a normal Python dictionary, or</span>
+<span class="sd">        a :class:`DeleteData &lt;globus_sdk.TransferData&gt;` object.</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Submit a delete task \</span>
@@ -774,7 +781,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.1 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
