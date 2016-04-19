@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High Level API &mdash; globus-sdk-python 0.2.2 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,9 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.2 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.3 documentation" href="index.html" />
     <link rel="next" title="Responses" href="api/response.html" />
-    <link rel="prev" title="Globus SDK for Python" href="index.html" /> 
+    <link rel="prev" title="Globus SDK for Python (Beta)" href="index.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -41,9 +41,9 @@
           <a href="api/response.html" title="Responses"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Globus SDK for Python"
+          <a href="index.html" title="Globus SDK for Python (Beta)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,14 +62,14 @@ Once instantiated, a Client gives you high-level interface to make API calls,
 without needing to know Globus API endpoints or their various parameters.</p>
 <p>For example, you could use the <code class="docutils literal"><span class="pre">TransferClient</span></code> to list your task history
 very simply:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">TransferClient</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="k">import</span> <span class="n">TransferClient</span>
 
 <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span> <span class="c1"># uses transfer_token from the config file</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;My Last 25 Tasks:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My Last 25 Tasks:&quot;</span><span class="p">)</span>
 <span class="c1"># `filter` to get Delete Tasks (default is just Transfer Tasks)</span>
 <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">task_list</span><span class="p">(</span><span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;type:TRANSFER,DELETE&quot;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <span class="target" id="module-globus_sdk"></span><div class="section" id="transfer-client">
@@ -101,6 +101,12 @@ query parameters.</p>
 <dt id="globus_sdk.TransferClient.get_endpoint">
 <code class="descname">get_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Endpoint name:&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="n">endpoint</span><span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">endpoint</span><span class="p">[</span><span class="s2">&quot;canonical_name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#get_endpoint_by_id">Get Endpoint by ID</a>
 in the REST documentation for details.</p>
@@ -110,6 +116,12 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.update_endpoint">
 <code class="descname">update_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">epup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;My New Endpoint Name&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Better Description&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">update_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">update_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">epup</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#update_endpoint_by_id">Update Endpoint by ID</a>
 in the REST documentation for details.</p>
@@ -119,6 +131,21 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.create_endpoint">
 <code class="descname">create_endpoint</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_endpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;endpoint&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;gridftp.example.edu&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="p">},</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_shared_endpoint</span><span class="p">(</span><span class="n">ep_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#create_endpoint">Create endpoint</a>
 in the REST documentation for details.</p>
@@ -128,6 +155,10 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.delete_endpoint">
 <code class="descname">delete_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delete_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">delete_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#delete_endpoint_by_id">Delete endpoint by id</a>
 in the REST documentation for details.</p>
@@ -145,30 +176,30 @@ GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&l
 <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a>
 objects wrapping python dictionaries built from JSON documents.</p>
 <p>Search for a given string as a fulltext search:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Search for a given string, but only on endpoints that you own:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} has ID {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> has ID </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>Search results are capped at a number of elements equal to the
 <code class="docutils literal"><span class="pre">num_results</span></code> parameter.
 If you want more than the default, 25, elements, do like so:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">num_results</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>It is very important to be aware that the Endpoint Search API limits
 you to 1000 results for any search query. If you attempt to exceed this
 limit, you will trigger a PaginationOverrunError.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">num_results</span><span class="o">=</span><span class="mi">1200</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>will trigger this error.</p>
@@ -184,13 +215,13 @@ the user with the same identity provider, but only if the
 endpoint is not already activated or going to expire within an
 hour (3600 seconds). If that fails, direct the user to the
 globus website to perform activation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">if_expires_in</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;AutoActivateFailed&quot;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Endpoint requires manual activation, please open &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Endpoint requires manual activation, please open &quot;</span>
 <span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;the following URL in a browser to activate the &quot;</span>
 <span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;endpoint:&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;https://www.globus.org/app/endpoints/</span><span class="si">%s</span><span class="s2">/activate&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;https://www.globus.org/app/endpoints/</span><span class="si">%s</span><span class="s2">/activate&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span>          <span class="o">%</span> <span class="n">ep_id</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># For python 2.X, use raw_input() instead</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press ENTER after activating the endpoint:&quot;</span><span class="p">)</span>
@@ -267,16 +298,17 @@ document</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shared_ep_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;DATA_TYPE&#39;</span><span class="p">:</span> <span class="s1">&#39;shared_endpoint&#39;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;host_endpoint&#39;</span><span class="p">:</span> <span class="n">host_endpoint_id</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;host_path&#39;</span><span class="p">:</span> <span class="n">host_path</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;shared_endpoint&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;host_endpoint&quot;</span><span class="p">:</span> <span class="n">host_endpoint_id</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;host_path&quot;</span><span class="p">:</span> <span class="n">host_path</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="c1"># optionally specify additional endpoint fields</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;my test share&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;my test share&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_shared_endpoint</span><span class="p">(</span><span class="n">shared_ep_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>See
@@ -429,9 +461,9 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_ls">
 <code class="descname">operation_ls</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_ls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_ls" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/ls</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">operation_ls</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/project1/&quot;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>See
@@ -443,7 +475,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_mkdir">
 <code class="descname">operation_mkdir</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>path</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_mkdir" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/mkdir</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_mkdir</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/newdir/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -456,7 +488,7 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.operation_rename">
 <code class="descname">operation_rename</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>oldpath</em>, <em>newpath</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_rename" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/rename</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_rename</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="o">=</span><span class="s2">&quot;/~/file1.txt&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                    <span class="n">newpath</span><span class="o">=</span><span class="s2">&quot;/~/project1data.txt&quot;</span><span class="p">)</span>
 </pre></div>
@@ -476,15 +508,15 @@ in the REST documentation for details.</p>
 <dt id="globus_sdk.TransferClient.submit_transfer">
 <code class="descname">submit_transfer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">source_endpoint_id</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                                <span class="n">destination_endpoint_id</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/dir/&quot;</span><span class="p">,</span> <span class="s2">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/file.txt&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>               <span class="s2">&quot;/dest/path/file.txt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_transfer</span><span class="p">(</span><span class="n">tdata</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The <cite>data</cite> parameter can be a normal Python dictionary, or
@@ -498,12 +530,12 @@ in the REST documentation for more details.</p>
 <dt id="globus_sdk.TransferClient.submit_delete">
 <code class="descname">submit_delete</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_delete" title="Permalink to this definition">¶</a></dt>
 <dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/delete</span></code></p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">DeleteData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">DeleteData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/dir/to/delete/&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/file/to/delete/file.txt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">delete_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_delete</span><span class="p">(</span><span class="n">ddata</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">delete_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">delete_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The <cite>data</cite> parameter can be a normal Python dictionary, or
@@ -936,7 +968,7 @@ prior invocation or by
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Globus SDK for Python</a></p>
+                        title="previous chapter">Globus SDK for Python (Beta)</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="api/response.html"
                         title="next chapter">Responses</a></p>
@@ -955,9 +987,6 @@ prior invocation or by
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -977,14 +1006,14 @@ prior invocation or by
           <a href="api/response.html" title="Responses"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Globus SDK for Python"
+          <a href="index.html" title="Globus SDK for Python (Beta)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>

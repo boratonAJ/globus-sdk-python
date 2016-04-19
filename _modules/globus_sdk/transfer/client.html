@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.2 documentation</title>
+    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.2 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.3 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -97,6 +97,11 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``GET /endpoint/&lt;endpoint_id&gt;``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; endpoint = tc.get_endpoint(endpoint_id)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Endpoint name:&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;       endpoint[&quot;display_name&quot;] or endpoint[&quot;canonical_name&quot;])</span>
+
 <span class="sd">        See</span>
 <span class="sd">        `Get Endpoint by ID \</span>
 <span class="sd">        &lt;https://docs.globus.org/api/transfer/endpoint/#get_endpoint_by_id&gt;`_</span>
@@ -108,6 +113,11 @@
 <div class="viewcode-block" id="TransferClient.update_endpoint"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.update_endpoint">[docs]</a>    <span class="k">def</span> <span class="nf">update_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``PUT /endpoint/&lt;endpoint_id&gt;``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; epup = dict(display_name=&quot;My New Endpoint Name&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;             description=&quot;Better Description&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; update_result = tc.update_endpoint(endpoint_id, epup)</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Update Endpoint by ID \</span>
@@ -121,6 +131,20 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /endpoint/&lt;endpoint_id&gt;``</span>
 
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; ep_data = {</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;DATA_TYPE&quot;: &quot;endpoint&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;display_name&quot;: display_name,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;DATA&quot;: [</span>
+<span class="sd">        &gt;&gt;&gt;     {</span>
+<span class="sd">        &gt;&gt;&gt;       &quot;DATA_TYPE&quot;: &quot;server&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;       &quot;hostname&quot;: &quot;gridftp.example.edu&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     },</span>
+<span class="sd">        &gt;&gt;&gt;   ],</span>
+<span class="sd">        &gt;&gt;&gt; }</span>
+<span class="sd">        &gt;&gt;&gt; create_result = tc.create_shared_endpoint(ep_data)</span>
+<span class="sd">        &gt;&gt;&gt; endpoint_id = create_result[&quot;id&quot;]</span>
+
 <span class="sd">        See</span>
 <span class="sd">        `Create endpoint \</span>
 <span class="sd">        &lt;https://docs.globus.org/api/transfer/endpoint/#create_endpoint&gt;`_</span>
@@ -131,6 +155,9 @@
 <div class="viewcode-block" id="TransferClient.delete_endpoint"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.delete_endpoint">[docs]</a>    <span class="k">def</span> <span class="nf">delete_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``DELETE /endpoint/&lt;endpoint_id&gt;``</span>
+
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; delete_result = tc.delete_endpoint(endpoint_id)</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Delete endpoint by id \</span>
@@ -306,14 +333,15 @@
 
 <span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
 <span class="sd">        &gt;&gt;&gt; shared_ep_data = {</span>
-<span class="sd">        &gt;&gt;&gt;   &#39;DATA_TYPE&#39;: &#39;shared_endpoint&#39;,</span>
-<span class="sd">        &gt;&gt;&gt;   &#39;host_endpoint&#39;: host_endpoint_id,</span>
-<span class="sd">        &gt;&gt;&gt;   &#39;host_path&#39;: host_path,</span>
-<span class="sd">        &gt;&gt;&gt;   &#39;display_name&#39;: display_name,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;DATA_TYPE&quot;: &quot;shared_endpoint&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;host_endpoint&quot;: host_endpoint_id,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;host_path&quot;: host_path,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;display_name&quot;: display_name,</span>
 <span class="sd">        &gt;&gt;&gt;   # optionally specify additional endpoint fields</span>
-<span class="sd">        &gt;&gt;&gt;   &#39;description&#39;: &#39;my test share&#39;</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;description&quot;: &quot;my test share&quot;</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
 <span class="sd">        &gt;&gt;&gt; create_result = tc.create_shared_endpoint(shared_ep_data)</span>
+<span class="sd">        &gt;&gt;&gt; endpoint_id = create_result[&quot;id&quot;]</span>
 
 <span class="sd">        See</span>
 <span class="sd">        `Create shared endpoint \</span>
@@ -763,9 +791,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -781,13 +806,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
     </div>
   </body>
 </html>
