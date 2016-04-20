@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
@@ -27,8 +27,8 @@
     <link rel="next" title="Exceptions" href="exceptions.html" />
     <link rel="prev" title="High Level API" href="../api.html" /> 
   </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
+  <body>
+    <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,41 +43,42 @@
         <li class="right" >
           <a href="../api.html" title="High Level API"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body" role="main">
+          <div class="body">
             
   <div class="section" id="responses">
 <h1>Responses<a class="headerlink" href="#responses" title="Permalink to this headline">¶</a></h1>
-<p>All method return values for Globus SDK Clients are <code class="docutils literal"><span class="pre">GlobusResponse</span></code>
-objects or a simple data structure (typically a Python list or other
-iterable) containing <code class="docutils literal"><span class="pre">GlobusResponse</span></code> objects.</p>
-<p>To customize client methods with additional detail, we may use subclasses of
-<code class="docutils literal"><span class="pre">GlobusResponse</span></code>.
-For example the <code class="docutils literal"><span class="pre">GlobusHTTPResponse</span></code> attaches HTTP response information.</p>
+<p>All method return values for Globus SDK Clients are <tt class="docutils literal"><span class="pre">GlobusResponse</span></tt>
+objects.
+Some <tt class="docutils literal"><span class="pre">GlobusResponse</span></tt> objects are iterables.
+In those cases, their contents will also be <tt class="docutils literal"><span class="pre">GlobusResponse</span></tt> objects.</p>
+<p>To customize client methods with additional detail, the SDK uses subclasses of
+<tt class="docutils literal"><span class="pre">GlobusResponse</span></tt>.
+For example the <tt class="docutils literal"><span class="pre">GlobusHTTPResponse</span></tt> attaches HTTP response information.</p>
 <div class="section" id="response-classes">
 <h2>Response Classes<a class="headerlink" href="#response-classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.response.GlobusResponse">
-<em class="property">class </em><code class="descclassname">globus_sdk.response.</code><code class="descname">GlobusResponse</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic response object, with a single <code class="docutils literal"><span class="pre">data</span></code> member.</p>
+<em class="property">class </em><tt class="descclassname">globus_sdk.response.</tt><tt class="descname">GlobusResponse</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic response object, with a single <tt class="docutils literal"><span class="pre">data</span></tt> member.</p>
 <p>The most common response data is a JSON dictionary. To make
 handling this type of response as seemless as possible, the
-<code class="docutils literal"><span class="pre">GlobusResponse</span></code> object also supports direct dictionary item
+<tt class="docutils literal"><span class="pre">GlobusResponse</span></tt> object also supports direct dictionary item
 access, as an alias for accessing an item of the underlying
-<code class="docutils literal"><span class="pre">data</span></code>. If <code class="docutils literal"><span class="pre">data</span></code> is not a dictionary, item access will raise
-<code class="docutils literal"><span class="pre">TypeError</span></code>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Response ID&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span> <span class="c1"># alias for r.data[&quot;id&quot;]</span>
+<tt class="docutils literal"><span class="pre">data</span></tt>. If <tt class="docutils literal"><span class="pre">data</span></tt> is not a dictionary, item access will raise
+<tt class="docutils literal"><span class="pre">TypeError</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Response ID&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">])</span> <span class="c"># alias for r.data[&quot;id&quot;]</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="globus_sdk.response.GlobusResponse.data">
-<code class="descname">data</code><a class="headerlink" href="#globus_sdk.response.GlobusResponse.data" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">data</tt><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusResponse.data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusResponse.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Response data as a Python data structure. Usually a dict or
 list.</p>
 </dd></dl>
@@ -86,11 +87,11 @@ list.</p>
 
 <dl class="class">
 <dt id="globus_sdk.response.GlobusHTTPResponse">
-<em class="property">class </em><code class="descclassname">globus_sdk.response.</code><code class="descname">GlobusHTTPResponse</code><span class="sig-paren">(</span><em>http_response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusHTTPResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.response.GlobusResponse</span></code></a></p>
+<em class="property">class </em><tt class="descclassname">globus_sdk.response.</tt><tt class="descname">GlobusHTTPResponse</tt><big>(</big><em>http_response</em><big>)</big><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusHTTPResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.response.GlobusResponse</span></tt></a></p>
 <p>Response object that wraps an HTTP response from the underlying HTTP
 library. If the response is JSON, the parsed data will be available in
-<code class="docutils literal"><span class="pre">data</span></code>, otherwise <code class="docutils literal"><span class="pre">data</span></code> will be <code class="docutils literal"><span class="pre">None</span></code> and <code class="docutils literal"><span class="pre">text</span></code> should
+<tt class="docutils literal"><span class="pre">data</span></tt>, otherwise <tt class="docutils literal"><span class="pre">data</span></tt> will be <tt class="docutils literal"><span class="pre">None</span></tt> and <tt class="docutils literal"><span class="pre">text</span></tt> should
 be used instead.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -106,7 +107,7 @@ be used instead.</p>
 </table>
 <dl class="attribute">
 <dt id="globus_sdk.response.GlobusHTTPResponse.text">
-<code class="descname">text</code><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse.text" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">text</tt><a class="reference internal" href="../_modules/globus_sdk/response.html#GlobusHTTPResponse.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.response.GlobusHTTPResponse.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>The raw response data as a string.</p>
 </dd></dl>
 
@@ -114,13 +115,13 @@ be used instead.</p>
 
 <dl class="class">
 <dt id="globus_sdk.transfer.response.TransferResponse">
-<em class="property">class </em><code class="descclassname">globus_sdk.transfer.response.</code><code class="descname">TransferResponse</code><span class="sig-paren">(</span><em>http_response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/transfer/response.html#TransferResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.transfer.response.TransferResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.response.GlobusHTTPResponse</span></code></a></p>
-<p>Base class for <a class="reference internal" href="../api.html#globus_sdk.TransferClient" title="globus_sdk.TransferClient"><code class="xref py py-class docutils literal"><span class="pre">TransferClient</span></code></a>
+<em class="property">class </em><tt class="descclassname">globus_sdk.transfer.response.</tt><tt class="descname">TransferResponse</tt><big>(</big><em>http_response</em><big>)</big><a class="reference internal" href="../_modules/globus_sdk/transfer/response.html#TransferResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.transfer.response.TransferResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.response.GlobusHTTPResponse</span></tt></a></p>
+<p>Base class for <a class="reference internal" href="../api.html#globus_sdk.TransferClient" title="globus_sdk.TransferClient"><tt class="xref py py-class docutils literal"><span class="pre">TransferClient</span></tt></a>
 responses.</p>
 <dl class="attribute">
 <dt id="globus_sdk.transfer.response.TransferResponse.text">
-<code class="descname">text</code><a class="headerlink" href="#globus_sdk.transfer.response.TransferResponse.text" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">text</tt><a class="headerlink" href="#globus_sdk.transfer.response.TransferResponse.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>The raw response data as a string.</p>
 </dd></dl>
 
@@ -128,21 +129,21 @@ responses.</p>
 
 <dl class="class">
 <dt id="globus_sdk.transfer.response.IterableTransferResponse">
-<em class="property">class </em><code class="descclassname">globus_sdk.transfer.response.</code><code class="descname">IterableTransferResponse</code><span class="sig-paren">(</span><em>http_response</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/transfer/response.html#IterableTransferResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.transfer.response.IterableTransferResponse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.transfer.response.TransferResponse</span></code></a></p>
+<em class="property">class </em><tt class="descclassname">globus_sdk.transfer.response.</tt><tt class="descname">IterableTransferResponse</tt><big>(</big><em>http_response</em><big>)</big><a class="reference internal" href="../_modules/globus_sdk/transfer/response.html#IterableTransferResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.transfer.response.IterableTransferResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.transfer.response.TransferResponse</span></tt></a></p>
 <p>Response class for non-paged list oriented resources. Allows top level
 fields to be accessed normally via standard item access, and also
 provides a convenient way to iterate over the sub-item list in the
-<code class="docutils literal"><span class="pre">DATA</span></code> key:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Path:&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Equivalent to: for item in r[&quot;DATA&quot;]</span>
+<tt class="docutils literal"><span class="pre">DATA</span></tt> key:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Path:&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="s">&quot;path&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Equivalent to: for item in r[&quot;DATA&quot;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <dl class="attribute">
 <dt id="globus_sdk.transfer.response.IterableTransferResponse.text">
-<code class="descname">text</code><a class="headerlink" href="#globus_sdk.transfer.response.IterableTransferResponse.text" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">text</tt><a class="headerlink" href="#globus_sdk.transfer.response.IterableTransferResponse.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>The raw response data as a string.</p>
 </dd></dl>
 
@@ -155,7 +156,7 @@ provides a convenient way to iterate over the sub-item list in the
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -171,14 +172,12 @@ provides a convenient way to iterate over the sub-item list in the
   <h4>Next topic</h4>
   <p class="topless"><a href="exceptions.html"
                         title="next chapter">Exceptions</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/api/response.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/api/response.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -186,13 +185,16 @@ provides a convenient way to iterate over the sub-item list in the
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -207,12 +209,12 @@ provides a convenient way to iterate over the sub-item list in the
         <li class="right" >
           <a href="../api.html" title="High Level API"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer" role="contentinfo">
+    <div class="footer">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>
 </html>
