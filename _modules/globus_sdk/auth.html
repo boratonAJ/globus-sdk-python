@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.auth &mdash; globus-sdk-python 0.2.3 documentation</title>
+    <title>globus_sdk.auth &mdash; globus-sdk-python 0.2.4 documentation</title>
     
     <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.2.3',
+        VERSION:     '0.2.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.3 documentation" href="../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.4 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -56,22 +56,46 @@
 
 
 <div class="viewcode-block" id="AuthClient"><a class="viewcode-back" href="../../api.html#globus_sdk.AuthClient">[docs]</a><span class="k">class</span> <span class="nc">AuthClient</span><span class="p">(</span><span class="n">BaseClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Client for the</span>
+<span class="sd">    `Globus Auth API &lt;https://docs.globus.org/api/auth/&gt;`_</span>
+
+<span class="sd">    This class provides helper methods for most common resources in the</span>
+<span class="sd">    Auth API, and the common low-level interface from</span>
+<span class="sd">    :class:`BaseClient &lt;globus_sdk.base.BaseClient&gt;` of ``get``, ``put``,</span>
+<span class="sd">    ``post``, and ``delete`` methods, which can be used to access any API</span>
+<span class="sd">    resource.</span>
+
+<span class="sd">    There are generally two types of resources, distinguished by the type</span>
+<span class="sd">    of authentication which they use. Resources available to end users of</span>
+<span class="sd">    Globus are authenticated with a Globus Auth Token</span>
+<span class="sd">    (&quot;Authentication: Bearer ...&quot;), while resources available to OAuth</span>
+<span class="sd">    Clients are authenticated using Basic Auth with the Client&#39;s ID and</span>
+<span class="sd">    Secret.</span>
+<span class="sd">    Some resources may be available with either authentication type.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get_default_environ</span><span class="p">(),</span> <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">app_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Client for the</span>
-<span class="sd">        `Globus Auth API &lt;https://docs.globus.org/api/auth/&gt;`_</span>
-
-<span class="sd">        This class provides helper methods for most common resources in the</span>
-<span class="sd">        Auth API, and the common low-level interface from</span>
-<span class="sd">        :class:`BaseClient &lt;globus_sdk.base.BaseClient&gt;`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">BaseClient</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;auth&quot;</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
                             <span class="n">app_name</span><span class="o">=</span><span class="n">app_name</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AuthClient.get_identities"><a class="viewcode-back" href="../../api.html#globus_sdk.AuthClient.get_identities">[docs]</a>    <span class="k">def</span> <span class="nf">get_identities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        GET /v2/api/identities</span>
+
+<span class="sd">        Given ``usernames=&lt;U&gt;`` or (exclusive) ``identity_ids=&lt;I&gt;`` as keyword</span>
+<span class="sd">        arguments, looks up identity information for the set of identities</span>
+<span class="sd">        provided.</span>
+<span class="sd">        ``&lt;U&gt;`` and ``&lt;I&gt;`` in this case are comma-delimited strings listing</span>
+<span class="sd">        multiple Identity Usernames or Identity IDs.</span>
+
+<span class="sd">        Available with either authentication type.</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Identities Resources \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/auth/reference/\</span>
+<span class="sd">        #v2_api_identities_resources&gt;`_</span>
+<span class="sd">        in the API documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/v2/api/identities&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span></div>
 
@@ -79,9 +103,15 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        POST /v2/oauth2/token/introspect</span>
 
-<span class="sd">        Get information about a Globus Auth token. Requires basic auth</span>
-<span class="sd">        using oauth client credentials, where username=client_id</span>
-<span class="sd">        and password=client_secret.</span>
+<span class="sd">        Get information about a Globus Auth token.</span>
+
+<span class="sd">        Requires Basic Auth using Oauth Client credentials.</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Token Introspection \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/auth/reference/\</span>
+<span class="sd">        #token_introspection_post_v2_oauth2_token_introspect&gt;`_</span>
+<span class="sd">        in the API documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">merge_params</span><span class="p">(</span><span class="n">kw</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/v2/oauth2/token/introspect&quot;</span><span class="p">,</span>
@@ -119,13 +149,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

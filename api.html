@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High Level API &mdash; globus-sdk-python 0.2.3 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.4 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.3',
+        VERSION:     '0.2.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.3 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.4 documentation" href="index.html" />
     <link rel="next" title="Responses" href="api/response.html" />
     <link rel="prev" title="Globus SDK for Python (Beta)" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,14 +43,14 @@
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="high-level-api">
 <span id="api"></span><h1>High Level API<a class="headerlink" href="#high-level-api" title="Permalink to this headline">¶</a></h1>
@@ -60,33 +60,33 @@ environment variables, or programmatically (either as a parameter at
 instantiation time, or as a modification after the fact).
 Once instantiated, a Client gives you high-level interface to make API calls,
 without needing to know Globus API endpoints or their various parameters.</p>
-<p>For example, you could use the <tt class="docutils literal"><span class="pre">TransferClient</span></tt> to list your task history
+<p>For example, you could use the <code class="docutils literal"><span class="pre">TransferClient</span></code> to list your task history
 very simply:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">TransferClient</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="k">import</span> <span class="n">TransferClient</span>
 
-<span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span> <span class="c"># uses transfer_token from the config file</span>
+<span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span> <span class="c1"># uses transfer_token from the config file</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&quot;My Last 25 Tasks:&quot;</span><span class="p">)</span>
-<span class="c"># `filter` to get Delete Tasks (default is just Transfer Tasks)</span>
-<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">task_list</span><span class="p">(</span><span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s">&quot;type:TRANSFER,DELETE&quot;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="s">&quot;task_id&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s">&quot;status&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My Last 25 Tasks:&quot;</span><span class="p">)</span>
+<span class="c1"># `filter` to get Delete Tasks (default is just Transfer Tasks)</span>
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">task_list</span><span class="p">(</span><span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;type:TRANSFER,DELETE&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <span class="target" id="module-globus_sdk"></span><div class="section" id="transfer-client">
 <h2>Transfer Client<a class="headerlink" href="#transfer-client" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.TransferClient">
-<em class="property">class </em><tt class="descclassname">globus_sdk.</tt><tt class="descname">TransferClient</tt><big>(</big><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">TransferClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></code></a></p>
 <p>Client for the
 <a class="reference external" href="https://docs.globus.org/api/transfer/">Globus Transfer API</a>.</p>
 <p>This class provides helper methods for most common resources in the
-REST API, and basic <tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">put</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt>, and <tt class="docutils literal"><span class="pre">delete</span></tt> methods
+REST API, and basic <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">put</span></code>, <code class="docutils literal"><span class="pre">post</span></code>, and <code class="docutils literal"><span class="pre">delete</span></code> methods
 from the base rest client that can be used to access any REST resource.</p>
 <p>There are two types of helper methods: list methods which return an
-iterator of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></tt></a>
+iterator of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a>
 objects, and simple methods that return a single
-<a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a>
+<a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a>
 object.</p>
 <p>Detailed documentation is available in the official REST API
 documentation, which is linked to from the method documentation. Methods
@@ -94,20 +94,20 @@ that allow arbitrary keyword arguments will pass the extra arguments as
 query parameters.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint">
-<tt class="descname">get_endpoint</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></tt></p>
+<code class="descname">get_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">get_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;Endpoint name:&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>      <span class="n">endpoint</span><span class="p">[</span><span class="s">&quot;display_name&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">endpoint</span><span class="p">[</span><span class="s">&quot;canonical_name&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Endpoint name:&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="n">endpoint</span><span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">endpoint</span><span class="p">[</span><span class="s2">&quot;canonical_name&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>See
@@ -117,19 +117,19 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint">
-<tt class="descname">update_endpoint</tt><big>(</big><em>endpoint_id</em>, <em>data</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></tt></p>
+<code class="descname">update_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">epup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">display_name</span><span class="o">=</span><span class="s">&quot;My New Endpoint Name&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>            <span class="n">description</span><span class="o">=</span><span class="s">&quot;Better Description&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">epup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">display_name</span><span class="o">=</span><span class="s2">&quot;My New Endpoint Name&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Better Description&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">update_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">update_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">epup</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -140,29 +140,29 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.create_endpoint">
-<tt class="descname">create_endpoint</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.create_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></tt></p>
+<code class="descname">create_endpoint</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ep_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s">&quot;endpoint&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;DATA&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;endpoint&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA&quot;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>      <span class="s">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s">&quot;server&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>      <span class="s">&quot;hostname&quot;</span><span class="p">:</span> <span class="s">&quot;gridftp.example.edu&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;server&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;gridftp.example.edu&quot;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="p">},</span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_shared_endpoint</span><span class="p">(</span><span class="n">ep_data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>See
@@ -172,17 +172,17 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint">
-<tt class="descname">delete_endpoint</tt><big>(</big><em>endpoint_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></tt></p>
+<code class="descname">delete_endpoint</code><span class="sig-paren">(</span><em>endpoint_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">delete_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">delete_endpoint</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -193,7 +193,7 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_search">
-<tt class="descname">endpoint_search</tt><big>(</big><em>filter_fulltext=None</em>, <em>filter_scope=None</em>, <em>num_results=25</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
+<code class="descname">endpoint_search</code><span class="sig-paren">(</span><em>filter_fulltext=None</em>, <em>filter_scope=None</em>, <em>num_results=25</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_search" title="Permalink to this definition">¶</a></dt>
 <dd><pre class="literal-block">
 GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&lt;filter_scope&gt;
 </pre>
@@ -201,36 +201,36 @@ GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&l
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <p>Search for a given string as a fulltext search:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s">&#39;String to search for!&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s">&#39;display_name&#39;</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Search for a given string, but only on endpoints that you own:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s">&#39;my-endpoints&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} has ID {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]))</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> has ID </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>Search results are capped at a number of elements equal to the
-<tt class="docutils literal"><span class="pre">num_results</span></tt> parameter.
+<code class="docutils literal"><span class="pre">num_results</span></code> parameter.
 If you want more than the default, 25, elements, do like so:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s">&#39;String to search for!&#39;</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;String to search for!&#39;</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">num_results</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s">&#39;display_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>It is important to be aware that the Endpoint Search API limits
 you to 1000 results for any search query.
 If you attempt to exceed this limit, you will trigger a
-<a class="reference internal" href="api/exceptions.html#globus_sdk.exc.PaginationOverrunError" title="globus_sdk.exc.PaginationOverrunError"><tt class="xref py py-class docutils literal"><span class="pre">PaginationOverrunError</span></tt></a></p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s">&#39;globus&#39;</span><span class="p">,</span> <span class="c"># a very common string</span>
-<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">num_results</span><span class="o">=</span><span class="mi">1200</span><span class="p">):</span> <span class="c"># num too large!</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s">&#39;display_name&#39;</span><span class="p">])</span>
+<a class="reference internal" href="api/exceptions.html#globus_sdk.exc.PaginationOverrunError" title="globus_sdk.exc.PaginationOverrunError"><code class="xref py py-class docutils literal"><span class="pre">PaginationOverrunError</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;globus&#39;</span><span class="p">,</span> <span class="c1"># a very common string</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">num_results</span><span class="o">=</span><span class="mi">1200</span><span class="p">):</span> <span class="c1"># num too large!</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>will trigger this error.</p>
@@ -240,13 +240,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_autoactivate">
-<tt class="descname">endpoint_autoactivate</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/autoactivate</span></tt></p>
+<code class="descname">endpoint_autoactivate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_autoactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/autoactivate</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -256,16 +256,16 @@ the user with the same identity provider, but only if the
 endpoint is not already activated or going to expire within an
 hour (3600 seconds). If that fails, direct the user to the
 globus website to perform activation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">if_expires_in</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;AutoActivateFailed&quot;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Endpoint requires manual activation, please open &quot;</span>
-<span class="gp">&gt;&gt;&gt; </span>          <span class="s">&quot;the following URL in a browser to activate the &quot;</span>
-<span class="gp">&gt;&gt;&gt; </span>          <span class="s">&quot;endpoint:&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;https://www.globus.org/app/endpoints/</span><span class="si">%s</span><span class="s">/activate&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;AutoActivateFailed&quot;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Endpoint requires manual activation, please open &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;the following URL in a browser to activate the &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s2">&quot;endpoint:&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;https://www.globus.org/app/endpoints/</span><span class="si">%s</span><span class="s2">/activate&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span>          <span class="o">%</span> <span class="n">ep_id</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="c"># For python 2.X, use raw_input() instead</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Press ENTER after activating the endpoint:&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># For python 2.X, use raw_input() instead</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press ENTER after activating the endpoint:&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">r</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_autoactivate</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">if_expires_in</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -280,13 +280,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_deactivate">
-<tt class="descname">endpoint_deactivate</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_deactivate" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/deactivate</span></tt></p>
+<code class="descname">endpoint_deactivate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/deactivate</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -297,19 +297,19 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_activate">
-<tt class="descname">endpoint_activate</tt><big>(</big><em>endpoint_id</em>, <em>data</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_activate" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activate</span></tt></p>
+<code class="descname">endpoint_activate</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_activate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_activate" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activate</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <p>Consider using autoactivate and web activation instead, described
 in the example for
-<a class="reference internal" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="globus_sdk.TransferClient.endpoint_autoactivate"><tt class="xref py py-meth docutils literal"><span class="pre">endpoint_autoactivate()</span></tt></a>.</p>
+<a class="reference internal" href="#globus_sdk.TransferClient.endpoint_autoactivate" title="globus_sdk.TransferClient.endpoint_autoactivate"><code class="xref py py-meth docutils literal"><span class="pre">endpoint_autoactivate()</span></code></a>.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint_activation/#autoactivate_endpoint">Activate endpoint</a>
 in the REST documentation for details.</p>
@@ -317,13 +317,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_get_activation_requirements">
-<tt class="descname">endpoint_get_activation_requirements</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_get_activation_requirements" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activation_requirements</span></tt></p>
+<code class="descname">endpoint_get_activation_requirements</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_get_activation_requirements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_get_activation_requirements" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/activation_requirements</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -334,13 +334,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.my_effective_pause_rule_list">
-<tt class="descname">my_effective_pause_rule_list</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.my_effective_pause_rule_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_effective_pause_rule_list</span></tt></p>
+<code class="descname">my_effective_pause_rule_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.my_effective_pause_rule_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.my_effective_pause_rule_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_effective_pause_rule_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -351,13 +351,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.my_shared_endpoint_list">
-<tt class="descname">my_shared_endpoint_list</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.my_shared_endpoint_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list</span></tt></p>
+<code class="descname">my_shared_endpoint_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.my_shared_endpoint_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.my_shared_endpoint_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/my_shared_endpoint_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -368,30 +368,30 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.create_shared_endpoint">
-<tt class="descname">create_shared_endpoint</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.create_shared_endpoint" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/shared_endpoint</span></tt></p>
+<code class="descname">create_shared_endpoint</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_shared_endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_shared_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/shared_endpoint</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; A python dict representation of a <tt class="docutils literal"><span class="pre">shared_endpoint</span></tt>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> &#8211; A python dict representation of a <code class="docutils literal"><span class="pre">shared_endpoint</span></code>
 document</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">shared_ep_data</span> <span class="o">=</span> <span class="p">{</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s">&quot;shared_endpoint&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;host_endpoint&quot;</span><span class="p">:</span> <span class="n">host_endpoint_id</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;host_path&quot;</span><span class="p">:</span> <span class="n">host_path</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="c"># optionally specify additional endpoint fields</span>
-<span class="gp">&gt;&gt;&gt; </span>  <span class="s">&quot;description&quot;</span><span class="p">:</span> <span class="s">&quot;my test share&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;shared_endpoint&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;host_endpoint&quot;</span><span class="p">:</span> <span class="n">host_endpoint_id</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;host_path&quot;</span><span class="p">:</span> <span class="n">host_path</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="c1"># optionally specify additional endpoint fields</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;my test share&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_shared_endpoint</span><span class="p">(</span><span class="n">shared_ep_data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>See
@@ -401,13 +401,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_server_list">
-<tt class="descname">endpoint_server_list</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_server_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server_list</span></tt></p>
+<code class="descname">endpoint_server_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_server_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_server_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -418,13 +418,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_server">
-<tt class="descname">get_endpoint_server</tt><big>(</big><em>endpoint_id</em>, <em>server_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></tt></p>
+<code class="descname">get_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_server" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -435,13 +435,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_server">
-<tt class="descname">add_endpoint_server</tt><big>(</big><em>endpoint_id</em>, <em>server_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server</span></tt></p>
+<code class="descname">add_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_server" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -452,13 +452,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint_server">
-<tt class="descname">update_endpoint_server</tt><big>(</big><em>endpoint_id</em>, <em>server_id</em>, <em>server_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></tt></p>
+<code class="descname">update_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em>, <em>server_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_server" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -469,13 +469,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_server">
-<tt class="descname">delete_endpoint_server</tt><big>(</big><em>endpoint_id</em>, <em>server_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></tt></p>
+<code class="descname">delete_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_server" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -486,13 +486,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_role_list">
-<tt class="descname">endpoint_role_list</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_role_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role_list</span></tt></p>
+<code class="descname">endpoint_role_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_role_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_role_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -503,13 +503,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_role">
-<tt class="descname">add_endpoint_role</tt><big>(</big><em>endpoint_id</em>, <em>role_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role</span></tt></p>
+<code class="descname">add_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_role" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -520,13 +520,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_role">
-<tt class="descname">get_endpoint_role</tt><big>(</big><em>endpoint_id</em>, <em>role_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></tt></p>
+<code class="descname">get_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_role" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -537,13 +537,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_role">
-<tt class="descname">delete_endpoint_role</tt><big>(</big><em>endpoint_id</em>, <em>role_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_role" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></tt></p>
+<code class="descname">delete_endpoint_role</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>role_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_role" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/role/&lt;role_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -554,13 +554,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.endpoint_acl_list">
-<tt class="descname">endpoint_acl_list</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_acl_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access_list</span></tt></p>
+<code class="descname">endpoint_acl_list</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_acl_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_acl_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -568,13 +568,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_endpoint_acl_rule">
-<tt class="descname">get_endpoint_acl_rule</tt><big>(</big><em>endpoint_id</em>, <em>rule_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></tt></p>
+<code class="descname">get_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -582,13 +582,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.add_endpoint_acl_rule">
-<tt class="descname">add_endpoint_acl_rule</tt><big>(</big><em>endpoint_id</em>, <em>rule_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access</span></tt></p>
+<code class="descname">add_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.add_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.add_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -596,13 +596,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint_acl_rule">
-<tt class="descname">update_endpoint_acl_rule</tt><big>(</big><em>endpoint_id</em>, <em>rule_id</em>, <em>rule_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></tt></p>
+<code class="descname">update_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em>, <em>rule_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -610,13 +610,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_endpoint_acl_rule">
-<tt class="descname">delete_endpoint_acl_rule</tt><big>(</big><em>endpoint_id</em>, <em>rule_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></tt></p>
+<code class="descname">delete_endpoint_acl_rule</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>rule_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_endpoint_acl_rule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_endpoint_acl_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/access/&lt;rule_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -624,13 +624,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.bookmark_list">
-<tt class="descname">bookmark_list</tt><big>(</big><em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.bookmark_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark_list</span></tt></p>
+<code class="descname">bookmark_list</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.bookmark_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.bookmark_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -638,13 +638,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.create_bookmark">
-<tt class="descname">create_bookmark</tt><big>(</big><em>bookmark_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.create_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/bookmark</span></tt></p>
+<code class="descname">create_bookmark</code><span class="sig-paren">(</span><em>bookmark_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.create_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.create_bookmark" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/bookmark</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -652,13 +652,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_bookmark">
-<tt class="descname">get_bookmark</tt><big>(</big><em>bookmark_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></tt></p>
+<code class="descname">get_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_bookmark" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -666,13 +666,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_bookmark">
-<tt class="descname">update_bookmark</tt><big>(</big><em>bookmark_id</em>, <em>bookmark_data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.update_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">PUT</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></tt></p>
+<code class="descname">update_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em>, <em>bookmark_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_bookmark" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -680,13 +680,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete_bookmark">
-<tt class="descname">delete_bookmark</tt><big>(</big><em>bookmark_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete_bookmark" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></tt></p>
+<code class="descname">delete_bookmark</code><span class="sig-paren">(</span><em>bookmark_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.delete_bookmark"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.delete_bookmark" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">DELETE</span> <span class="pre">/bookmark/&lt;bookmark_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -694,19 +694,19 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_ls">
-<tt class="descname">operation_ls</tt><big>(</big><em>endpoint_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.operation_ls" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/ls</span></tt></p>
+<code class="descname">operation_ls</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_ls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_ls" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/ls</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.IterableTransferResponse" title="globus_sdk.transfer.response.IterableTransferResponse"><code class="xref py py-class docutils literal"><span class="pre">IterableTransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">operation_ls</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/~/project1/&quot;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">operation_ls</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/project1/&quot;</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>See
@@ -716,18 +716,18 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_mkdir">
-<tt class="descname">operation_mkdir</tt><big>(</big><em>endpoint_id</em>, <em>path</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.operation_mkdir" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/mkdir</span></tt></p>
+<code class="descname">operation_mkdir</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>path</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_mkdir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/mkdir</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_mkdir</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/~/newdir/&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_mkdir</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/~/newdir/&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See
@@ -737,19 +737,19 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.operation_rename">
-<tt class="descname">operation_rename</tt><big>(</big><em>endpoint_id</em>, <em>oldpath</em>, <em>newpath</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.operation_rename" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/rename</span></tt></p>
+<code class="descname">operation_rename</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>oldpath</em>, <em>newpath</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.operation_rename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.operation_rename" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/operation/endpoint/&lt;endpoint_id&gt;/rename</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_rename</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="o">=</span><span class="s">&quot;/~/file1.txt&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                    <span class="n">newpath</span><span class="o">=</span><span class="s">&quot;/~/project1data.txt&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span><span class="o">.</span><span class="n">operation_rename</span><span class="p">(</span><span class="n">ep_id</span><span class="p">,</span> <span class="n">oldpath</span><span class="o">=</span><span class="s2">&quot;/~/file1.txt&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                    <span class="n">newpath</span><span class="o">=</span><span class="s2">&quot;/~/project1data.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See
@@ -759,13 +759,13 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_submission_id">
-<tt class="descname">get_submission_id</tt><big>(</big><em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_submission_id" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/submission_id</span></tt></p>
+<code class="descname">get_submission_id</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_submission_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_submission_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/submission_id</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -773,32 +773,32 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.submit_transfer">
-<tt class="descname">submit_transfer</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></tt></p>
+<code class="descname">submit_transfer</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_transfer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_transfer" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/transfer</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <p>Example usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">source_endpoint_id</span><span class="p">,</span>
 <span class="gp">&gt;&gt;&gt; </span>                                <span class="n">destination_endpoint_id</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">label</span><span class="o">=</span><span class="s">&quot;SDK example&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">sync_level</span><span class="o">=</span><span class="s">&quot;checksum&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s">&quot;/source/path/dir/&quot;</span><span class="p">,</span> <span class="s">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s">&quot;/source/path/file.txt&quot;</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>               <span class="s">&quot;/dest/path/file.txt&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SDK example&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                <span class="n">sync_level</span><span class="o">=</span><span class="s2">&quot;checksum&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/dir/&quot;</span><span class="p">,</span> <span class="s2">&quot;/dest/path/dir/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tdata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/source/path/file.txt&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>               <span class="s2">&quot;/dest/path/file.txt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transfer_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_transfer</span><span class="p">(</span><span class="n">tdata</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">transfer_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The <cite>data</cite> parameter can be a normal Python dictionary, or
-a <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><tt class="xref py py-class docutils literal"><span class="pre">TransferData</span></tt></a> object.</p>
+a <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">TransferData</span></code></a> object.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/task_submit/#submit_a_transfer_task">Submit a transfer task</a>
 in the REST documentation for more details.</p>
@@ -806,27 +806,27 @@ in the REST documentation for more details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.submit_delete">
-<tt class="descname">submit_delete</tt><big>(</big><em>data</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.submit_delete" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/delete</span></tt></p>
+<code class="descname">submit_delete</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.submit_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.submit_delete" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/delete</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
 <p>Example usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">DeleteData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s">&quot;/dir/to/delete/&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s">&quot;/file/to/delete/file.txt&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">DeleteData</span><span class="p">(</span><span class="n">tc</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/dir/to/delete/&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddata</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;/file/to/delete/file.txt&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">delete_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">submit_delete</span><span class="p">(</span><span class="n">ddata</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">delete_result</span><span class="p">[</span><span class="s">&quot;task_id&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;task_id =&quot;</span><span class="p">,</span> <span class="n">delete_result</span><span class="p">[</span><span class="s2">&quot;task_id&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The <cite>data</cite> parameter can be a normal Python dictionary, or
-a <a class="reference internal" href="#globus_sdk.DeleteData" title="globus_sdk.DeleteData"><tt class="xref py py-class docutils literal"><span class="pre">DeleteData</span></tt></a> object.</p>
+a <a class="reference internal" href="#globus_sdk.DeleteData" title="globus_sdk.DeleteData"><code class="xref py py-class docutils literal"><span class="pre">DeleteData</span></code></a> object.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/task_submit/#submit_a_delete_task">Submit a delete task</a>
 in the REST documentation for details.</p>
@@ -834,27 +834,27 @@ in the REST documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.make_submit_transfer_data">
-<tt class="descname">make_submit_transfer_data</tt><big>(</big><em>source_endpoint</em>, <em>dest_endpoint</em>, <em>transfer_items</em>, <em>label=None</em>, <em>sync_level=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.make_submit_transfer_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED: Use <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><tt class="xref py py-class docutils literal"><span class="pre">TransferData</span></tt></a>
+<code class="descname">make_submit_transfer_data</code><span class="sig-paren">(</span><em>source_endpoint</em>, <em>dest_endpoint</em>, <em>transfer_items</em>, <em>label=None</em>, <em>sync_level=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.make_submit_transfer_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.make_submit_transfer_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: Use <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">TransferData</span></code></a>
 instead.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.make_submit_transfer_item">
-<tt class="descname">make_submit_transfer_item</tt><big>(</big><em>source</em>, <em>dest</em>, <em>recursive=False</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.make_submit_transfer_item" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED: Use <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><tt class="xref py py-class docutils literal"><span class="pre">TransferData</span></tt></a>
+<code class="descname">make_submit_transfer_item</code><span class="sig-paren">(</span><em>source</em>, <em>dest</em>, <em>recursive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.make_submit_transfer_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.make_submit_transfer_item" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED: Use <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">TransferData</span></code></a>
 instead.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_list">
-<tt class="descname">task_list</tt><big>(</big><em>num_results=10</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/task_list</span></tt></p>
+<code class="descname">task_list</code><span class="sig-paren">(</span><em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -862,13 +862,13 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_event_list">
-<tt class="descname">task_event_list</tt><big>(</big><em>task_id</em>, <em>num_results=10</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;/event_list</span></tt></p>
+<code class="descname">task_event_list</code><span class="sig-paren">(</span><em>task_id</em>, <em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_event_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_event_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;/event_list</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -876,13 +876,13 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get_task">
-<tt class="descname">get_task</tt><big>(</big><em>task_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get_task" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;</span></tt></p>
+<code class="descname">get_task</code><span class="sig-paren">(</span><em>task_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.get_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.get_task" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">/task/&lt;task_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -890,13 +890,13 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_task">
-<tt class="descname">update_task</tt><big>(</big><em>task_id</em>, <em>data</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.update_task" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">PUT</span> <span class="pre">/task/&lt;task_id&gt;</span></tt></p>
+<code class="descname">update_task</code><span class="sig-paren">(</span><em>task_id</em>, <em>data</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_task" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/task/&lt;task_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -904,13 +904,13 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.cancel_task">
-<tt class="descname">cancel_task</tt><big>(</big><em>task_id</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.cancel_task" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/cancel</span></tt></p>
+<code class="descname">cancel_task</code><span class="sig-paren">(</span><em>task_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.cancel_task"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.cancel_task" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/cancel</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -918,13 +918,13 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.task_pause_info">
-<tt class="descname">task_pause_info</tt><big>(</big><em>task_id</em>, <em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.task_pause_info" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/pause_info</span></tt></p>
+<code class="descname">task_pause_info</code><span class="sig-paren">(</span><em>task_id</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.task_pause_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.task_pause_info" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/task/&lt;task_id&gt;/pause_info</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><tt class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></tt></a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -932,7 +932,7 @@ instead.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.delete">
-<tt class="descname">delete</tt><big>(</big><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a DELETE request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -944,11 +944,11 @@ instead.</p>
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -957,7 +957,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.get">
-<tt class="descname">get</tt><big>(</big><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a GET request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -969,11 +969,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -982,7 +982,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.post">
-<tt class="descname">post</tt><big>(</big><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.post" title="Permalink to this definition">¶</a></dt>
+<code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a POST request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -996,11 +996,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1009,7 +1009,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.put">
-<tt class="descname">put</tt><big>(</big><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.put" title="Permalink to this definition">¶</a></dt>
+<code class="descname">put</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.put" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a PUT request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1023,11 +1023,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1036,7 +1036,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.set_app_name">
-<tt class="descname">set_app_name</tt><big>(</big><em>app_name</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.set_app_name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_app_name</code><span class="sig-paren">(</span><em>app_name</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.set_app_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set an application name to send to Globus services as part of the User
 Agent.</p>
 <p>Application developers are encouraged to set an app name as a courtesy
@@ -1046,21 +1046,21 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.set_auth_basic">
-<tt class="descname">set_auth_basic</tt><big>(</big><em>username</em>, <em>password</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_auth_basic</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set basic authentication for this client to the base64 encoding of
-<tt class="docutils literal"><span class="pre">&lt;username&gt;:&lt;password&gt;</span></tt>.
+<code class="docutils literal"><span class="pre">&lt;username&gt;:&lt;password&gt;</span></code>.
 Overrides any auth token or basic auth header that may have been set by
 a prior invocation or by
-<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_token" title="globus_sdk.base.BaseClient.set_token"><tt class="xref py py-func docutils literal"><span class="pre">set_token</span></tt></a></p>
+<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_token" title="globus_sdk.base.BaseClient.set_token"><code class="xref py py-func docutils literal"><span class="pre">set_token</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.TransferClient.set_token">
-<tt class="descname">set_token</tt><big>(</big><em>token</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferClient.set_token" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_token</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.TransferClient.set_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set bearer token authentication for this client.
 Overrides any token or basic auth header that may have been set by a
 prior invocation or by
-<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_auth_basic" title="globus_sdk.base.BaseClient.set_auth_basic"><tt class="xref py py-func docutils literal"><span class="pre">set_auth_basic</span></tt></a></p>
+<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_auth_basic" title="globus_sdk.base.BaseClient.set_auth_basic"><code class="xref py py-func docutils literal"><span class="pre">set_auth_basic</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -1069,27 +1069,27 @@ prior invocation or by
 <h3>Helper Objects<a class="headerlink" href="#helper-objects" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="globus_sdk.TransferData">
-<em class="property">class </em><tt class="descclassname">globus_sdk.</tt><tt class="descname">TransferData</tt><big>(</big><em>transfer_client</em>, <em>source_endpoint</em>, <em>destination_endpoint</em>, <em>label=None</em>, <em>sync_level=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">TransferData</code><span class="sig-paren">(</span><em>transfer_client</em>, <em>source_endpoint</em>, <em>destination_endpoint</em>, <em>label=None</em>, <em>sync_level=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#TransferData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
 <p>Convenience class for constructing a transfer document, to use as the
 <cite>data</cite> parameter to
-<a class="reference internal" href="#globus_sdk.TransferClient.submit_transfer" title="globus_sdk.TransferClient.submit_transfer"><tt class="xref py py-meth docutils literal"><span class="pre">submit_transfer</span></tt></a>.</p>
+<a class="reference internal" href="#globus_sdk.TransferClient.submit_transfer" title="globus_sdk.TransferClient.submit_transfer"><code class="xref py py-meth docutils literal"><span class="pre">submit_transfer</span></code></a>.</p>
 <p>At least one item must be added using
-<a class="reference internal" href="#globus_sdk.TransferData.add_item" title="globus_sdk.TransferData.add_item"><tt class="xref py py-meth docutils literal"><span class="pre">add_item</span></tt></a>.</p>
+<a class="reference internal" href="#globus_sdk.TransferData.add_item" title="globus_sdk.TransferData.add_item"><code class="xref py py-meth docutils literal"><span class="pre">add_item</span></code></a>.</p>
 <p>For compatibility with older code and those knowledgeable about the API
-sync_level can be <tt class="docutils literal"><span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">2</span></tt>, or <tt class="docutils literal"><span class="pre">3</span></tt>, but it can also be
-<tt class="docutils literal"><span class="pre">&quot;exists&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;mtime&quot;</span></tt>, or <tt class="docutils literal"><span class="pre">&quot;checksum&quot;</span></tt> if you want greater clarity in
+sync_level can be <code class="docutils literal"><span class="pre">1</span></code>, <code class="docutils literal"><span class="pre">2</span></code>, or <code class="docutils literal"><span class="pre">3</span></code>, but it can also be
+<code class="docutils literal"><span class="pre">&quot;exists&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;mtime&quot;</span></code>, or <code class="docutils literal"><span class="pre">&quot;checksum&quot;</span></code> if you want greater clarity in
 client code.</p>
 <p>Includes fetching the submission ID as part of document generation. The
 submission ID can be pulled out of here to inspect, but the document
 can be used as-is multiple times over to retry a potential submission
 failure (so there shouldn&#8217;t be any need to inspect it).</p>
 <p>See the
-<a class="reference internal" href="#globus_sdk.TransferClient.submit_transfer" title="globus_sdk.TransferClient.submit_transfer"><tt class="xref py py-meth docutils literal"><span class="pre">submit_transfer</span></tt></a>
+<a class="reference internal" href="#globus_sdk.TransferClient.submit_transfer" title="globus_sdk.TransferClient.submit_transfer"><code class="xref py py-meth docutils literal"><span class="pre">submit_transfer</span></code></a>
 documentation for example usage.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferData.add_item">
-<tt class="descname">add_item</tt><big>(</big><em>source_path</em>, <em>destination_path</em>, <em>recursive=False</em><big>)</big><a class="headerlink" href="#globus_sdk.TransferData.add_item" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_item</code><span class="sig-paren">(</span><em>source_path</em>, <em>destination_path</em>, <em>recursive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#TransferData.add_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferData.add_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a file or directory to be transfered.</p>
 <p>Appends a transfer_item document to the DATA key of the transfer
 document.</p>
@@ -1099,25 +1099,25 @@ document.</p>
 
 <dl class="class">
 <dt id="globus_sdk.DeleteData">
-<em class="property">class </em><tt class="descclassname">globus_sdk.</tt><tt class="descname">DeleteData</tt><big>(</big><em>transfer_client</em>, <em>endpoint</em>, <em>label=None</em>, <em>recursive=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#globus_sdk.DeleteData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">dict</span></tt></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">DeleteData</code><span class="sig-paren">(</span><em>transfer_client</em>, <em>endpoint</em>, <em>label=None</em>, <em>recursive=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#DeleteData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.DeleteData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
 <p>Convenience class for constructing a delete document, to use as the
 <cite>data</cite> parameter to
-<a class="reference internal" href="#globus_sdk.TransferClient.submit_delete" title="globus_sdk.TransferClient.submit_delete"><tt class="xref py py-meth docutils literal"><span class="pre">submit_delete</span></tt></a>.</p>
+<a class="reference internal" href="#globus_sdk.TransferClient.submit_delete" title="globus_sdk.TransferClient.submit_delete"><code class="xref py py-meth docutils literal"><span class="pre">submit_delete</span></code></a>.</p>
 <p>At least one item must be added using
-<a class="reference internal" href="#globus_sdk.DeleteData.add_item" title="globus_sdk.DeleteData.add_item"><tt class="xref py py-meth docutils literal"><span class="pre">add_item</span></tt></a>.</p>
+<a class="reference internal" href="#globus_sdk.DeleteData.add_item" title="globus_sdk.DeleteData.add_item"><code class="xref py py-meth docutils literal"><span class="pre">add_item</span></code></a>.</p>
 <p>Includes fetching the submission ID as part of document generation. The
 submission ID can be pulled out of here to inspect, but the document
 can be used as-is multiple times over to retry a potential submission
 failure (so there shouldn&#8217;t be any need to inspect it).</p>
-<p>See the <a class="reference internal" href="#globus_sdk.TransferClient.submit_delete" title="globus_sdk.TransferClient.submit_delete"><tt class="xref py py-meth docutils literal"><span class="pre">submit_delete</span></tt></a>
+<p>See the <a class="reference internal" href="#globus_sdk.TransferClient.submit_delete" title="globus_sdk.TransferClient.submit_delete"><code class="xref py py-meth docutils literal"><span class="pre">submit_delete</span></code></a>
 documentation for example usage.</p>
 <dl class="method">
 <dt id="globus_sdk.DeleteData.add_item">
-<tt class="descname">add_item</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#globus_sdk.DeleteData.add_item" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_item</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/data.html#DeleteData.add_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.DeleteData.add_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a file or directory to be deleted. If any of the paths are
-directories, <tt class="docutils literal"><span class="pre">recursive</span></tt> must be set True on the top level
-<tt class="docutils literal"><span class="pre">DeleteData</span></tt>.</p>
+directories, <code class="docutils literal"><span class="pre">recursive</span></code> must be set True on the top level
+<code class="docutils literal"><span class="pre">DeleteData</span></code>.</p>
 <p>Appends a delete_item document to the DATA key of the delete
 document.</p>
 </dd></dl>
@@ -1129,10 +1129,10 @@ document.</p>
 <h3>Specialized Errors<a class="headerlink" href="#specialized-errors" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="globus_sdk.exc.TransferAPIError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">TransferAPIError</tt><big>(</big><em>r</em><big>)</big><a class="reference internal" href="_modules/globus_sdk/exc.html#TransferAPIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TransferAPIError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="api/exceptions.html#globus_sdk.exc.GlobusAPIError" title="globus_sdk.exc.GlobusAPIError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusAPIError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">TransferAPIError</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/exc.html#TransferAPIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TransferAPIError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api/exceptions.html#globus_sdk.exc.GlobusAPIError" title="globus_sdk.exc.GlobusAPIError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusAPIError</span></code></a></p>
 <p>Error class for the Transfer API client. In addition to the
-inherited <tt class="docutils literal"><span class="pre">code</span></tt> and <tt class="docutils literal"><span class="pre">message</span></tt> instance variables, provides:</p>
+inherited <code class="docutils literal"><span class="pre">code</span></code> and <code class="docutils literal"><span class="pre">message</span></code> instance variables, provides:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1150,14 +1150,14 @@ provided when contacting <a class="reference external" href="mailto:support&#37;
 <h2>Auth Client<a class="headerlink" href="#auth-client" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.AuthClient">
-<em class="property">class </em><tt class="descclassname">globus_sdk.</tt><tt class="descname">AuthClient</tt><big>(</big><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.</code><code class="descname">AuthClient</code><span class="sig-paren">(</span><em>environment='default'</em>, <em>token=None</em>, <em>app_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/auth.html#AuthClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.AuthClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.base.BaseClient</span></code></a></p>
 <p>Client for the
 <a class="reference external" href="https://docs.globus.org/api/auth/">Globus Auth API</a></p>
 <p>This class provides helper methods for most common resources in the
 Auth API, and the common low-level interface from
-<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><tt class="xref py py-class docutils literal"><span class="pre">BaseClient</span></tt></a> of <tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">put</span></tt>,
-<tt class="docutils literal"><span class="pre">post</span></tt>, and <tt class="docutils literal"><span class="pre">delete</span></tt> methods, which can be used to access any API
+<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient" title="globus_sdk.base.BaseClient"><code class="xref py py-class docutils literal"><span class="pre">BaseClient</span></code></a> of <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">put</span></code>,
+<code class="docutils literal"><span class="pre">post</span></code>, and <code class="docutils literal"><span class="pre">delete</span></code> methods, which can be used to access any API
 resource.</p>
 <p>There are generally two types of resources, distinguished by the type
 of authentication which they use. Resources available to end users of
@@ -1168,12 +1168,12 @@ Secret.
 Some resources may be available with either authentication type.</p>
 <dl class="method">
 <dt id="globus_sdk.AuthClient.get_identities">
-<tt class="descname">get_identities</tt><big>(</big><em>**params</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.get_identities" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_identities</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/auth.html#AuthClient.get_identities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.AuthClient.get_identities" title="Permalink to this definition">¶</a></dt>
 <dd><p>GET /v2/api/identities</p>
-<p>Given <tt class="docutils literal"><span class="pre">usernames=&lt;U&gt;</span></tt> or (exclusive) <tt class="docutils literal"><span class="pre">identity_ids=&lt;I&gt;</span></tt> as keyword
+<p>Given <code class="docutils literal"><span class="pre">usernames=&lt;U&gt;</span></code> or (exclusive) <code class="docutils literal"><span class="pre">identity_ids=&lt;I&gt;</span></code> as keyword
 arguments, looks up identity information for the set of identities
 provided.
-<tt class="docutils literal"><span class="pre">&lt;U&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;I&gt;</span></tt> in this case are comma-delimited strings listing
+<code class="docutils literal"><span class="pre">&lt;U&gt;</span></code> and <code class="docutils literal"><span class="pre">&lt;I&gt;</span></code> in this case are comma-delimited strings listing
 multiple Identity Usernames or Identity IDs.</p>
 <p>Available with either authentication type.</p>
 <p>See
@@ -1183,7 +1183,7 @@ in the API documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.token_introspect">
-<tt class="descname">token_introspect</tt><big>(</big><em>token</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.token_introspect" title="Permalink to this definition">¶</a></dt>
+<code class="descname">token_introspect</code><span class="sig-paren">(</span><em>token</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/auth.html#AuthClient.token_introspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.AuthClient.token_introspect" title="Permalink to this definition">¶</a></dt>
 <dd><p>POST /v2/oauth2/token/introspect</p>
 <p>Get information about a Globus Auth token.</p>
 <p>Requires Basic Auth using Oauth Client credentials.</p>
@@ -1194,7 +1194,7 @@ in the API documentation for details.</p>
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.delete">
-<tt class="descname">delete</tt><big>(</big><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a DELETE request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1206,11 +1206,11 @@ in the API documentation for details.</p>
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1219,7 +1219,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.get">
-<tt class="descname">get</tt><big>(</big><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>path</em>, <em>params=None</em>, <em>headers=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a GET request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1231,11 +1231,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>headers</strong> &#8211; dict of HTTP headers to add to the request</li>
 <li><strong>auth</strong> &#8211; tuple of (user, password) for basic auth [DEPRECATED]</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1244,7 +1244,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.post">
-<tt class="descname">post</tt><big>(</big><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.post" title="Permalink to this definition">¶</a></dt>
+<code class="descname">post</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a POST request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1258,11 +1258,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1271,7 +1271,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.put">
-<tt class="descname">put</tt><big>(</big><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.put" title="Permalink to this definition">¶</a></dt>
+<code class="descname">put</code><span class="sig-paren">(</span><em>path</em>, <em>json_body=None</em>, <em>params=None</em>, <em>headers=None</em>, <em>text_body=None</em>, <em>auth=None</em>, <em>response_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.put" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make a PUT request to the specified path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1285,11 +1285,11 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 <li><strong>json_body</strong> &#8211; dict that will be encoded as a JSON request body</li>
 <li><strong>text_body</strong> &#8211; raw string that will be the request body</li>
 <li><strong>response_class</strong> &#8211; class for response object, overrides the
-client&#8217;s <tt class="docutils literal"><span class="pre">default_response_class</span></tt></li>
+client&#8217;s <code class="docutils literal"><span class="pre">default_response_class</span></code></li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><tt class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></tt></a> object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.response.GlobusHTTPResponse" title="globus_sdk.response.GlobusHTTPResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusHTTPResponse</span></code></a> object</p>
 </td>
 </tr>
 </tbody>
@@ -1298,7 +1298,7 @@ client&#8217;s <tt class="docutils literal"><span class="pre">default_response_c
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.set_app_name">
-<tt class="descname">set_app_name</tt><big>(</big><em>app_name</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.set_app_name" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_app_name</code><span class="sig-paren">(</span><em>app_name</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.set_app_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set an application name to send to Globus services as part of the User
 Agent.</p>
 <p>Application developers are encouraged to set an app name as a courtesy
@@ -1308,21 +1308,21 @@ interacting with Globus Support.</p>
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.set_auth_basic">
-<tt class="descname">set_auth_basic</tt><big>(</big><em>username</em>, <em>password</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_auth_basic</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.set_auth_basic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set basic authentication for this client to the base64 encoding of
-<tt class="docutils literal"><span class="pre">&lt;username&gt;:&lt;password&gt;</span></tt>.
+<code class="docutils literal"><span class="pre">&lt;username&gt;:&lt;password&gt;</span></code>.
 Overrides any auth token or basic auth header that may have been set by
 a prior invocation or by
-<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_token" title="globus_sdk.base.BaseClient.set_token"><tt class="xref py py-func docutils literal"><span class="pre">set_token</span></tt></a></p>
+<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_token" title="globus_sdk.base.BaseClient.set_token"><code class="xref py py-func docutils literal"><span class="pre">set_token</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="globus_sdk.AuthClient.set_token">
-<tt class="descname">set_token</tt><big>(</big><em>token</em><big>)</big><a class="headerlink" href="#globus_sdk.AuthClient.set_token" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_token</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#globus_sdk.AuthClient.set_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set bearer token authentication for this client.
 Overrides any token or basic auth header that may have been set by a
 prior invocation or by
-<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_auth_basic" title="globus_sdk.base.BaseClient.set_auth_basic"><tt class="xref py py-func docutils literal"><span class="pre">set_auth_basic</span></tt></a></p>
+<a class="reference internal" href="api/baseclient.html#globus_sdk.base.BaseClient.set_auth_basic" title="globus_sdk.base.BaseClient.set_auth_basic"><code class="xref py py-func docutils literal"><span class="pre">set_auth_basic</span></code></a></p>
 </dd></dl>
 
 </dd></dl>
@@ -1334,7 +1334,7 @@ prior invocation or by
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
@@ -1355,12 +1355,14 @@ prior invocation or by
   <h4>Next topic</h4>
   <p class="topless"><a href="api/response.html"
                         title="next chapter">Responses</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/api.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -1368,16 +1370,13 @@ prior invocation or by
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1392,12 +1391,12 @@ prior invocation or by
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              >previous</a> |</li>
-        <li><a href="index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

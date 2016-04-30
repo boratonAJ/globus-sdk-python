@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Exceptions &mdash; globus-sdk-python 0.2.3 documentation</title>
+    <title>Exceptions &mdash; globus-sdk-python 0.2.4 documentation</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.3',
+        VERSION:     '0.2.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,12 +23,12 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.3 documentation" href="../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.4 documentation" href="../index.html" />
     <link rel="next" title="Low Level API" href="baseclient.html" />
     <link rel="prev" title="Responses" href="response.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,63 +43,63 @@
         <li class="right" >
           <a href="response.html" title="Responses"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="exceptions">
 <h1>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h1>
-<p>All Globus SDK errors inherit from <tt class="docutils literal"><span class="pre">GlobusError</span></tt>, and all SDK error classes
-are importable from <tt class="docutils literal"><span class="pre">globus_sdk</span></tt>.</p>
+<p>All Globus SDK errors inherit from <code class="docutils literal"><span class="pre">GlobusError</span></code>, and all SDK error classes
+are importable from <code class="docutils literal"><span class="pre">globus_sdk</span></code>.</p>
 <p>You can therefore capture <em>all</em> errors thrown by the SDK by looking for
-<tt class="docutils literal"><span class="pre">GlobusError</span></tt>, as in:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">TransferClient</span><span class="p">,</span> <span class="n">GlobusError</span>
+<code class="docutils literal"><span class="pre">GlobusError</span></code>, as in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="k">import</span> <span class="n">TransferClient</span><span class="p">,</span> <span class="n">GlobusError</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span>
-    <span class="c"># search with no parameters will throw an exception</span>
+    <span class="c1"># search with no parameters will throw an exception</span>
     <span class="n">eps</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">exc</span><span class="o">.</span><span class="n">GlobusError</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Globus Error!&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Globus Error!&quot;</span><span class="p">)</span>
     <span class="k">raise</span>
 </pre></div>
 </div>
-<p>In most cases, it&#8217;s best to look for specific subclasses of <tt class="docutils literal"><span class="pre">GlobusError</span></tt>.
+<p>In most cases, it&#8217;s best to look for specific subclasses of <code class="docutils literal"><span class="pre">GlobusError</span></code>.
 For example, to write code which is distinguishes between network failures and
-unexpected API conditions, you&#8217;ll want to look for <tt class="docutils literal"><span class="pre">NetworkError</span></tt> and
-<tt class="docutils literal"><span class="pre">GlobusAPIError</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="p">(</span><span class="n">TransferClient</span><span class="p">,</span>
+unexpected API conditions, you&#8217;ll want to look for <code class="docutils literal"><span class="pre">NetworkError</span></code> and
+<code class="docutils literal"><span class="pre">GlobusAPIError</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="k">import</span> <span class="p">(</span><span class="n">TransferClient</span><span class="p">,</span>
                         <span class="n">GlobusError</span><span class="p">,</span> <span class="n">GlobusAPIError</span><span class="p">,</span> <span class="n">NetworkError</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">tc</span> <span class="o">=</span> <span class="n">TransferClient</span><span class="p">()</span>
 
-    <span class="n">eps</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="n">filter_fulltext</span><span class="o">=</span><span class="s">&quot;myendpointsearch&quot;</span><span class="p">)</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="n">filter_fulltext</span><span class="o">=</span><span class="s2">&quot;myendpointsearch&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">eps</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s">&quot;display_name&quot;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s2">&quot;display_name&quot;</span><span class="p">])</span>
 
     <span class="o">...</span>
 <span class="k">except</span> <span class="n">GlobusAPIError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="c"># Error response from the REST service, check the code and message for</span>
-    <span class="c"># details.</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">((</span><span class="s">&quot;Got a Globus API Error</span><span class="se">\n</span><span class="s">&quot;</span>
-                   <span class="s">&quot;Error Code: {}</span><span class="se">\n</span><span class="s">&quot;</span>
-                   <span class="s">&quot;Error Message: {}&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">))</span>
+    <span class="c1"># Error response from the REST service, check the code and message for</span>
+    <span class="c1"># details.</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">((</span><span class="s2">&quot;Got a Globus API Error</span><span class="se">\n</span><span class="s2">&quot;</span>
+                   <span class="s2">&quot;Error Code: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                   <span class="s2">&quot;Error Message: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">))</span>
     <span class="k">raise</span> <span class="n">e</span>
 <span class="k">except</span> <span class="n">NetworkError</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">((</span><span class="s">&quot;Network Failure. &quot;</span>
-                   <span class="s">&quot;Possibly a firewall or connectivity issue&quot;</span><span class="p">))</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">((</span><span class="s2">&quot;Network Failure. &quot;</span>
+                   <span class="s2">&quot;Possibly a firewall or connectivity issue&quot;</span><span class="p">))</span>
     <span class="k">raise</span>
 <span class="k">except</span> <span class="n">GlobusError</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s">&quot;Totally unexpected GlobusError!&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Totally unexpected GlobusError!&quot;</span><span class="p">)</span>
     <span class="k">raise</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="o">...</span>
@@ -108,22 +108,22 @@ unexpected API conditions, you&#8217;ll want to look for <tt class="docutils lit
 <p>Of course, if you want to learn more information about the response, you should
 inspect it more than this.
 Malformed calls to Globus SDK methods may raise standard python exceptions
-(<tt class="docutils literal"><span class="pre">ValueError</span></tt>, etc.), but for correct usage, all errors will be instances of
-<tt class="docutils literal"><span class="pre">GlobusError</span></tt>.</p>
+(<code class="docutils literal"><span class="pre">ValueError</span></code>, etc.), but for correct usage, all errors will be instances of
+<code class="docutils literal"><span class="pre">GlobusError</span></code>.</p>
 <div class="section" id="error-classes">
 <h2>Error Classes<a class="headerlink" href="#error-classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="globus_sdk.exc.GlobusError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">GlobusError</tt><a class="reference internal" href="../_modules/globus_sdk/exc.html#GlobusError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">GlobusError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#GlobusError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
 <p>Root of the Globus Exception hierarchy.
 Stub class.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="globus_sdk.exc.GlobusAPIError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">GlobusAPIError</tt><big>(</big><em>r</em>, <em>*args</em>, <em>**kw</em><big>)</big><a class="reference internal" href="../_modules/globus_sdk/exc.html#GlobusAPIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusAPIError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">GlobusAPIError</code><span class="sig-paren">(</span><em>r</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/globus_sdk/exc.html#GlobusAPIError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.GlobusAPIError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></code></a></p>
 <p>Wraps errors returned by a REST API.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -145,29 +145,29 @@ suitable for display to end users.</li>
 
 <dl class="class">
 <dt id="globus_sdk.exc.NetworkError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">NetworkError</tt><a class="reference internal" href="../_modules/globus_sdk/exc.html#NetworkError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.NetworkError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">NetworkError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#NetworkError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.NetworkError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></code></a></p>
 <p>Error communicating with the REST API server.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="globus_sdk.exc.ConnectionError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">ConnectionError</tt><a class="reference internal" href="../_modules/globus_sdk/exc.html#ConnectionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.ConnectionError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">ConnectionError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#ConnectionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.ConnectionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></code></a></p>
 <p>A connection error occured while making a REST request.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="globus_sdk.exc.TimeoutError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">TimeoutError</tt><a class="reference internal" href="../_modules/globus_sdk/exc.html#TimeoutError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TimeoutError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">TimeoutError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#TimeoutError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.TimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.NetworkError" title="globus_sdk.exc.NetworkError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.NetworkError</span></code></a></p>
 <p>The REST request timed out.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="globus_sdk.exc.PaginationOverrunError">
-<em class="property">class </em><tt class="descclassname">globus_sdk.exc.</tt><tt class="descname">PaginationOverrunError</tt><a class="reference internal" href="../_modules/globus_sdk/exc.html#PaginationOverrunError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.PaginationOverrunError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><tt class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></tt></a></p>
+<em class="property">class </em><code class="descclassname">globus_sdk.exc.</code><code class="descname">PaginationOverrunError</code><a class="reference internal" href="../_modules/globus_sdk/exc.html#PaginationOverrunError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.exc.PaginationOverrunError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#globus_sdk.exc.GlobusError" title="globus_sdk.exc.GlobusError"><code class="xref py py-class docutils literal"><span class="pre">globus_sdk.exc.GlobusError</span></code></a></p>
 <p>Paginated results exceeded a limit set by our API. Too many pages of
 results were being requested, and the API maximum would be exceeded.</p>
 </dd></dl>
@@ -179,7 +179,7 @@ results were being requested, and the API maximum would be exceeded.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
@@ -195,12 +195,14 @@ results were being requested, and the API maximum would be exceeded.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="baseclient.html"
                         title="next chapter">Low Level API</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../_sources/api/exceptions.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/exceptions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -208,16 +210,13 @@ results were being requested, and the API maximum would be exceeded.</p>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -232,12 +231,12 @@ results were being requested, and the API maximum would be exceeded.</p>
         <li class="right" >
           <a href="response.html" title="Responses"
              >previous</a> |</li>
-        <li><a href="../index.html">globus-sdk-python 0.2.3 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>
