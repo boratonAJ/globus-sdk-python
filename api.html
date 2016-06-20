@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High Level API &mdash; globus-sdk-python 0.2.4 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.5 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.4',
+        VERSION:     '0.2.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.4 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.5 documentation" href="index.html" />
     <link rel="next" title="Responses" href="api/response.html" />
     <link rel="prev" title="Globus SDK for Python (Beta)" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -189,6 +189,20 @@ in the REST documentation for details.</p>
 <p>See
 <a class="reference external" href="https://docs.globus.org/api/transfer/endpoint/#delete_endpoint_by_id">Delete endpoint by id</a>
 in the REST documentation for details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="globus_sdk.TransferClient.endpoint_manager_monitored_endpoints">
+<code class="descname">endpoint_manager_monitored_endpoints</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_manager_monitored_endpoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_manager_monitored_endpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">endpoint_manager/monitored_endpoints</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -453,7 +467,7 @@ in the REST documentation for details.</p>
 <dl class="method">
 <dt id="globus_sdk.TransferClient.update_endpoint_server">
 <code class="descname">update_endpoint_server</code><span class="sig-paren">(</span><em>endpoint_id</em>, <em>server_id</em>, <em>server_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.update_endpoint_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.update_endpoint_server" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal"><span class="pre">POST</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
+<dd><p><code class="docutils literal"><span class="pre">PUT</span> <span class="pre">/endpoint/&lt;endpoint_id&gt;/server/&lt;server_id&gt;</span></code></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -844,6 +858,20 @@ instead.</p>
 <code class="descname">make_submit_transfer_item</code><span class="sig-paren">(</span><em>source</em>, <em>dest</em>, <em>recursive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.make_submit_transfer_item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.make_submit_transfer_item" title="Permalink to this definition">¶</a></dt>
 <dd><p>DEPRECATED: Use <a class="reference internal" href="#globus_sdk.TransferData" title="globus_sdk.TransferData"><code class="xref py py-class docutils literal"><span class="pre">TransferData</span></code></a>
 instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="globus_sdk.TransferClient.endpoint_manager_task_list">
+<code class="descname">endpoint_manager_task_list</code><span class="sig-paren">(</span><em>num_results=10</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/globus_sdk/transfer/client.html#TransferClient.endpoint_manager_task_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#globus_sdk.TransferClient.endpoint_manager_task_list" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">GET</span> <span class="pre">endpoint_manager/task_list</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">iterable of <a class="reference internal" href="api/response.html#globus_sdk.response.GlobusResponse" title="globus_sdk.response.GlobusResponse"><code class="xref py py-class docutils literal"><span class="pre">GlobusResponse</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -1391,7 +1419,7 @@ prior invocation or by
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.4 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
