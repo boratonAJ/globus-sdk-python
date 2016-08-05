@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.5 documentation</title>
+    <title>globus_sdk.transfer.client &mdash; globus-sdk-python 0.2.6 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.5',
+        VERSION:     '0.2.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.5 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.6 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -47,14 +47,14 @@
           <div class="body" role="main">
             
   <h1>Source code for globus_sdk.transfer.client</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="kn">import</span> <span class="n">exc</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">globus_sdk.base</span> <span class="kn">import</span> <span class="n">BaseClient</span><span class="p">,</span> <span class="n">merge_params</span>
-<span class="kn">from</span> <span class="nn">globus_sdk.transfer.response</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">globus_sdk</span> <span class="k">import</span> <span class="n">exc</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.base</span> <span class="k">import</span> <span class="n">BaseClient</span><span class="p">,</span> <span class="n">merge_params</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.transfer.response</span> <span class="k">import</span> <span class="p">(</span>
     <span class="n">TransferResponse</span><span class="p">,</span> <span class="n">IterableTransferResponse</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">globus_sdk.transfer.paging</span> <span class="kn">import</span> <span class="n">PaginatedResource</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.transfer.paging</span> <span class="k">import</span> <span class="n">PaginatedResource</span>
 
 
 <div class="viewcode-block" id="TransferClient"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient">[docs]</a><span class="k">class</span> <span class="nc">TransferClient</span><span class="p">(</span><span class="n">BaseClient</span><span class="p">):</span>
@@ -83,9 +83,9 @@
     <span class="n">default_response_class</span> <span class="o">=</span> <span class="n">TransferResponse</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">get_default_environ</span><span class="p">(),</span>
-                 <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+                 <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">BaseClient</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;transfer&quot;</span><span class="p">,</span> <span class="n">environment</span><span class="p">,</span> <span class="s2">&quot;/v0.10/&quot;</span><span class="p">,</span>
-                            <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+                            <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span> <span class="n">app_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">config_load_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get_transfer_token</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="p">)</span>
@@ -155,7 +155,7 @@
 <span class="sd">        &gt;&gt;&gt;     },</span>
 <span class="sd">        &gt;&gt;&gt;   ],</span>
 <span class="sd">        &gt;&gt;&gt; }</span>
-<span class="sd">        &gt;&gt;&gt; create_result = tc.create_shared_endpoint(ep_data)</span>
+<span class="sd">        &gt;&gt;&gt; create_result = tc.create_endpoint(ep_data)</span>
 <span class="sd">        &gt;&gt;&gt; endpoint_id = create_result[&quot;id&quot;]</span>
 
 <span class="sd">        See</span>
@@ -194,7 +194,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
                         <span class="n">response_class</span><span class="o">=</span><span class="n">IterableTransferResponse</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TransferClient.endpoint_search"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_search">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_fulltext</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="TransferClient.endpoint_search"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.endpoint_search">[docs]</a>    <span class="k">def</span> <span class="nf">endpoint_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_fulltext</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">num_results</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">r&quot;&quot;&quot;</span>
 <span class="sd">        .. parsed-literal::</span>
@@ -214,7 +214,7 @@
 <span class="sd">        Search for a given string, but only on endpoints that you own:</span>
 
 <span class="sd">        &gt;&gt;&gt; for ep in tc.endpoint_search(&#39;foo&#39;, filter_scope=&#39;my-endpoints&#39;):</span>
-<span class="sd">        &gt;&gt;&gt;     print(&#39;{} has ID {}&#39;.format(ep[&#39;display_name&#39;], ep[&#39;id&#39;]))</span>
+<span class="sd">        &gt;&gt;&gt;     print(&#39;{0} has ID {1}&#39;.format(ep[&#39;display_name&#39;], ep[&#39;id&#39;]))</span>
 
 <span class="sd">        Search results are capped at a number of elements equal to the</span>
 <span class="sd">        ``num_results`` parameter.</span>
@@ -574,8 +574,28 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``POST /endpoint/&lt;endpoint_id&gt;/access``</span>
 
+<span class="sd">        :param endpoint_id: id of endpoint to add the acl to</span>
+<span class="sd">        :param rule_data: A python dict representation of an ``access``</span>
+<span class="sd">                          document</span>
+
 <span class="sd">        :rtype: :class:`TransferResponse</span>
 <span class="sd">                &lt;globus_sdk.transfer.response.TransferResponse&gt;`</span>
+
+<span class="sd">        &gt;&gt;&gt; tc = globus_sdk.TransferClient()</span>
+<span class="sd">        &gt;&gt;&gt; rule_data = {</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;DATA_TYPE&quot;: &quot;access&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;principal_type&quot;: &quot;identity&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;principal&quot;: identity_id,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;path&quot;: &quot;/dataset1/&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;   &quot;permissions&quot;: &quot;rw&quot;,</span>
+<span class="sd">        &gt;&gt;&gt; }</span>
+<span class="sd">        &gt;&gt;&gt; result = tc.add_endpoint_acl_rule(endpoint_id, rule_data)</span>
+<span class="sd">        &gt;&gt;&gt; rule_id = result[&quot;id&quot;]</span>
+
+<span class="sd">        See</span>
+<span class="sd">        `Create access rule \</span>
+<span class="sd">        &lt;https://docs.globus.org/api/transfer/acl/#rest_access_create&gt;`_</span>
+<span class="sd">        in the REST documentation for details.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qjoin_path</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="s1">&#39;access&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">)</span></div>
@@ -796,7 +816,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/delete&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferClient.make_submit_transfer_data"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.make_submit_transfer_data">[docs]</a>    <span class="k">def</span> <span class="nf">make_submit_transfer_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_endpoint</span><span class="p">,</span> <span class="n">dest_endpoint</span><span class="p">,</span>
-                                  <span class="n">transfer_items</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sync_level</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                                  <span class="n">transfer_items</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sync_level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        DEPRECATED: Use :class:`TransferData &lt;globus_sdk.TransferData&gt;`</span>
@@ -818,12 +838,12 @@
         <span class="c1"># will just reject you with an error. This is kind of important: if</span>
         <span class="c1"># more levels are added in the future this method doesn&#39;t become</span>
         <span class="c1"># garbage overnight</span>
-        <span class="k">if</span> <span class="n">sync_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sync_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sync_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;exists&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;mtime&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
             <span class="n">sync_level</span> <span class="o">=</span> <span class="n">sync_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sync_level</span><span class="p">,</span> <span class="n">sync_level</span><span class="p">)</span>
             <span class="n">datadoc</span><span class="p">[</span><span class="s1">&#39;sync_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sync_level</span>
 
-        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">datadoc</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span>
 
         <span class="c1"># any remaining arguments are global options for the Transfer document</span>
@@ -833,7 +853,7 @@
 
         <span class="k">return</span> <span class="n">datadoc</span></div>
 
-<div class="viewcode-block" id="TransferClient.make_submit_transfer_item"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.make_submit_transfer_item">[docs]</a>    <span class="k">def</span> <span class="nf">make_submit_transfer_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TransferClient.make_submit_transfer_item"><a class="viewcode-back" href="../../../api.html#globus_sdk.TransferClient.make_submit_transfer_item">[docs]</a>    <span class="k">def</span> <span class="nf">make_submit_transfer_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        DEPRECATED: Use :class:`TransferData &lt;globus_sdk.TransferData&gt;`</span>
 <span class="sd">        instead.</span>
@@ -846,7 +866,7 @@
             <span class="s1">&#39;destination_path&#39;</span><span class="p">:</span> <span class="n">dest</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">recursive</span><span class="p">:</span>
-            <span class="n">datadoc</span><span class="p">[</span><span class="s1">&#39;recursive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">datadoc</span><span class="p">[</span><span class="s1">&#39;recursive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">return</span> <span class="n">datadoc</span></div>
 
@@ -941,8 +961,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -961,13 +981,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

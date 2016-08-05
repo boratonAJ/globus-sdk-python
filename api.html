@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High Level API &mdash; globus-sdk-python 0.2.5 documentation</title>
+    <title>High Level API &mdash; globus-sdk-python 0.2.6 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.5',
+        VERSION:     '0.2.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.5 documentation" href="index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.6 documentation" href="index.html" />
     <link rel="next" title="Responses" href="api/response.html" />
     <link rel="prev" title="Globus SDK for Python (Beta)" href="index.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -161,7 +161,7 @@ in the REST documentation for details.</p>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="p">},</span>
 <span class="gp">&gt;&gt;&gt; </span>  <span class="p">],</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_shared_endpoint</span><span class="p">(</span><span class="n">ep_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_endpoint</span><span class="p">(</span><span class="n">ep_data</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -227,7 +227,7 @@ GET /endpoint_search?filter_fulltext=&lt;filter_fulltext&gt;&amp;filter_scope=&l
 </div>
 <p>Search for a given string, but only on endpoints that you own:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">tc</span><span class="o">.</span><span class="n">endpoint_search</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">filter_scope</span><span class="o">=</span><span class="s1">&#39;my-endpoints&#39;</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> has ID </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> has ID </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ep</span><span class="p">[</span><span class="s1">&#39;display_name&#39;</span><span class="p">],</span> <span class="n">ep</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p>Search results are capped at a number of elements equal to the
@@ -602,10 +602,33 @@ in the REST documentation for details.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>endpoint_id</strong> &#8211; id of endpoint to add the acl to</li>
+<li><strong>rule_data</strong> &#8211; A python dict representation of an <code class="docutils literal"><span class="pre">access</span></code>
+document</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="api/response.html#globus_sdk.transfer.response.TransferResponse" title="globus_sdk.transfer.response.TransferResponse"><code class="xref py py-class docutils literal"><span class="pre">TransferResponse</span></code></a></p>
+</td>
 </tr>
 </tbody>
 </table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">globus_sdk</span><span class="o">.</span><span class="n">TransferClient</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rule_data</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;DATA_TYPE&quot;</span><span class="p">:</span> <span class="s2">&quot;access&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;principal_type&quot;</span><span class="p">:</span> <span class="s2">&quot;identity&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;principal&quot;</span><span class="p">:</span> <span class="n">identity_id</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/dataset1/&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="s2">&quot;permissions&quot;</span><span class="p">:</span> <span class="s2">&quot;rw&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">add_endpoint_acl_rule</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rule_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>See
+<a class="reference external" href="https://docs.globus.org/api/transfer/acl/#rest_access_create">Create access rule</a>
+in the REST documentation for details.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1393,8 +1416,8 @@ prior invocation or by
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -1419,12 +1442,12 @@ prior invocation or by
         <li class="right" >
           <a href="index.html" title="Globus SDK for Python (Beta)"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>

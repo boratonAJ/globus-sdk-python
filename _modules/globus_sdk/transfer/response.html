@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>globus_sdk.transfer.response &mdash; globus-sdk-python 0.2.5 documentation</title>
+    <title>globus_sdk.transfer.response &mdash; globus-sdk-python 0.2.6 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.2.5',
+        VERSION:     '0.2.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <link rel="top" title="globus-sdk-python 0.2.5 documentation" href="../../../index.html" />
+    <link rel="top" title="globus-sdk-python 0.2.6 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" /> 
   </head>
   <body role="document">
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,10 +49,10 @@
   <h1>Source code for globus_sdk.transfer.response</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">json</span>
 
-<span class="kn">from</span> <span class="nn">globus_sdk.response</span> <span class="kn">import</span> <span class="n">GlobusHTTPResponse</span>
+<span class="kn">from</span> <span class="nn">globus_sdk.response</span> <span class="k">import</span> <span class="n">GlobusHTTPResponse</span>
 
 
-<div class="viewcode-block" id="TransferResponse"><a class="viewcode-back" href="../../../api/response.html#globus_sdk.TransferResponse">[docs]</a><span class="k">class</span> <span class="nc">TransferResponse</span><span class="p">(</span><span class="n">GlobusHTTPResponse</span><span class="p">):</span>
+<div class="viewcode-block" id="TransferResponse"><a class="viewcode-back" href="../../../api/response.html#globus_sdk.transfer.response.TransferResponse">[docs]</a><span class="k">class</span> <span class="nc">TransferResponse</span><span class="p">(</span><span class="n">GlobusHTTPResponse</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for :class:`TransferClient &lt;globus_sdk.TransferClient&gt;`</span>
 <span class="sd">    responses.</span>
@@ -63,7 +63,7 @@
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="IterableTransferResponse"><a class="viewcode-back" href="../../../api/response.html#globus_sdk.IterableTransferResponse">[docs]</a><span class="k">class</span> <span class="nc">IterableTransferResponse</span><span class="p">(</span><span class="n">TransferResponse</span><span class="p">):</span>
+<div class="viewcode-block" id="IterableTransferResponse"><a class="viewcode-back" href="../../../api/response.html#globus_sdk.transfer.response.IterableTransferResponse">[docs]</a><span class="k">class</span> <span class="nc">IterableTransferResponse</span><span class="p">(</span><span class="n">TransferResponse</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Response class for non-paged list oriented resources. Allows top level</span>
 <span class="sd">    fields to be accessed normally via standard item access, and also</span>
@@ -87,8 +87,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
@@ -107,13 +107,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.5 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">globus-sdk-python 0.2.6 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2016, Globus.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
   </body>
 </html>
